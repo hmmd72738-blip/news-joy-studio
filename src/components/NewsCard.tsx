@@ -3,7 +3,7 @@ import { Calendar, ArrowRight } from "lucide-react";
 
 interface NewsCardProps {
   news: NewsItem;
-  onReadMore: (id: number) => void;
+  onReadMore: (id: number | string) => void;
 }
 
 const NewsCard = ({ news, onReadMore }: NewsCardProps) => {

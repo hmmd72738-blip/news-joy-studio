@@ -7,20 +7,48 @@ import Sidebar from "@/components/Sidebar";
 import NewsDetail from "@/components/NewsDetail";
 import ScrollToTop from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
-import { newsData, NewsItem } from "@/data/newsData";
+import { NewsItem, categories } from "@/data/newsData";
+import { useNews, DBNewsItem } from "@/hooks/useNews";
+
+// Helper to convert DB news to component NewsItem format
+const convertToNewsItem = (dbNews: DBNewsItem): NewsItem => {
+  const date = new Date(dbNews.created_at);
+  const banglaDate = date.toLocaleDateString('bn-BD', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+  
+  // Find category slug from categories list
+  const categoryData = categories.find(c => c.name === dbNews.category);
+  const categorySlug = categoryData?.slug || 'national';
+  
+  return {
+    id: dbNews.id as unknown as number, // Use string id
+    title: dbNews.title,
+    excerpt: dbNews.excerpt,
+    content: dbNews.content,
+    category: dbNews.category,
+    categorySlug: categorySlug,
+    image: dbNews.image_url,
+    author: dbNews.author,
+    date: banglaDate,
+    readTime: "৩ মিনিট",
+    isBreaking: dbNews.is_breaking,
+    isLead: dbNews.is_lead,
+  };
+};
 
 const Index = () => {
   const [darkMode, setDarkMode] = useState(false);
   const [activeCategory, setActiveCategory] = useState("home");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
-
-  // If the selected article no longer exists (e.g. after removing seeded/static data), return to list view.
-  useEffect(() => {
-    if (selectedNews && !newsData.some((n) => n.id === selectedNews.id)) {
-      setSelectedNews(null);
-    }
-  }, [selectedNews]);
+  
+  const { news: dbNews, loading } = useNews();
+  
+  // Convert DB news to component format
+  const newsData = dbNews.map(convertToNewsItem);
 
   useEffect(() => {
     if (darkMode) {
@@ -29,6 +57,13 @@ const Index = () => {
       document.documentElement.classList.remove("dark");
     }
   }, [darkMode]);
+
+  // If the selected article no longer exists, return to list view
+  useEffect(() => {
+    if (selectedNews && !newsData.some((n) => String(n.id) === String(selectedNews.id))) {
+      setSelectedNews(null);
+    }
+  }, [selectedNews, newsData]);
 
   const toggleDarkMode = () => setDarkMode(!darkMode);
 
@@ -40,10 +75,10 @@ const Index = () => {
   });
 
   const leadNews = filteredNews.find((news) => news.isLead) || filteredNews[0];
-  const otherNews = filteredNews.filter((news) => news.id !== leadNews?.id);
+  const otherNews = filteredNews.filter((news) => String(news.id) !== String(leadNews?.id));
 
-  const handleReadMore = (id: number) => {
-    const news = newsData.find((n) => n.id === id);
+  const handleReadMore = (id: number | string) => {
+    const news = newsData.find((n) => String(n.id) === String(id));
     if (news) {
       setSelectedNews(news);
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -53,6 +88,17 @@ const Index = () => {
   const handleBack = () => {
     setSelectedNews(null);
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-muted-foreground">সংবাদ লোড হচ্ছে...</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">

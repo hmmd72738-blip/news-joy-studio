@@ -1,6 +1,16 @@
-import { breakingNews } from "@/data/newsData";
+import { useNews } from "@/hooks/useNews";
 
 const BreakingNewsTicker = () => {
+  const { news } = useNews();
+  
+  // Filter only breaking news from database
+  const breakingNews = news.filter(n => n.is_breaking).map(n => n.title);
+  
+  // Don't render if no breaking news
+  if (breakingNews.length === 0) {
+    return null;
+  }
+
   return (
     <div className="bg-accent text-accent-foreground py-2 overflow-hidden">
       <div className="container flex items-center gap-4">
