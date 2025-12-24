@@ -15,6 +15,13 @@ const Index = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
 
+  // If the selected article no longer exists (e.g. after removing seeded/static data), return to list view.
+  useEffect(() => {
+    if (selectedNews && !newsData.some((n) => n.id === selectedNews.id)) {
+      setSelectedNews(null);
+    }
+  }, [selectedNews]);
+
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
