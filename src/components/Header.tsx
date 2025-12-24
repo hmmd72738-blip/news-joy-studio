@@ -147,25 +147,50 @@ const Header = ({
 
           {/* Mobile Nav */}
           {mobileMenuOpen && (
-            <ul className="md:hidden py-4 space-y-1 animate-fade-in-up">
-              {categories.map((cat) => (
-                <li key={cat.slug}>
-                  <button
-                    onClick={() => {
-                      setActiveCategory(cat.slug);
-                      setMobileMenuOpen(false);
-                    }}
-                    className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all ${
-                      activeCategory === cat.slug
-                        ? "bg-accent text-accent-foreground"
-                        : "hover:bg-primary-foreground/10"
-                    }`}
+            <div className="md:hidden py-4 space-y-1 animate-fade-in-up">
+              <ul className="space-y-1">
+                {categories.map((cat) => (
+                  <li key={cat.slug}>
+                    <button
+                      onClick={() => {
+                        setActiveCategory(cat.slug);
+                        setMobileMenuOpen(false);
+                      }}
+                      className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all ${
+                        activeCategory === cat.slug
+                          ? "bg-accent text-accent-foreground"
+                          : "hover:bg-primary-foreground/10"
+                      }`}
+                    >
+                      {cat.name}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              
+              {/* Mobile Auth Links */}
+              <div className="pt-4 mt-4 border-t border-primary-foreground/10 space-y-2">
+                {isAdmin && (
+                  <Link
+                    to="/admin"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="flex items-center gap-2 px-4 py-3 rounded-lg bg-accent text-accent-foreground font-medium"
                   >
-                    {cat.name}
-                  </button>
-                </li>
-              ))}
-            </ul>
+                    <Settings className="w-4 h-4" />
+                    <span>অ্যাডমিন প্যানেল</span>
+                  </Link>
+                )}
+                {!user && (
+                  <Link
+                    to="/auth"
+                    onClick={() => setMobileMenuOpen(false)}
+                    className="block px-4 py-3 rounded-lg bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors font-medium text-center"
+                  >
+                    লগইন করুন
+                  </Link>
+                )}
+              </div>
+            </div>
           )}
         </div>
       </nav>
