@@ -3,7 +3,7 @@ import { Calendar, Clock, User } from "lucide-react";
 
 interface LeadNewsProps {
   news: NewsItem;
-  onReadMore: (id: number) => void;
+  onReadMore: (id: number | string) => void;
 }
 
 const LeadNews = ({ news, onReadMore }: LeadNewsProps) => {
