@@ -39,7 +39,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-2 text-news-header-foreground/70">
                 <Phone className="w-4 h-4 text-accent" />
-                <span>+৮৮০ ১৭১২ ৩৪৫৬৭৮</span>
+                <a href="tel:01302108957" className="hover:text-accent transition-colors">০১৩০২১০৮৯৫৭</a>
               </li>
               <li className="flex items-center gap-2 text-news-header-foreground/70">
                 <Mail className="w-4 h-4 text-accent" />
@@ -53,7 +53,9 @@ const Footer = () => {
             <h4 className="text-lg font-bold mb-4">সামাজিক মাধ্যম</h4>
             <div className="flex gap-3">
               <a
-                href="#"
+                href="https://www.facebook.com/share/1CuDUqeDs3/"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="p-3 rounded-full bg-news-header-foreground/10 hover:bg-accent hover:text-accent-foreground transition-all"
                 aria-label="Facebook"
               >
