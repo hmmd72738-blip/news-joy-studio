@@ -1,6 +1,8 @@
 import { useState } from "react";
-import { Search, Menu, X, Moon, Sun } from "lucide-react";
+import { Link } from "react-router-dom";
+import { Search, Menu, X, Moon, Sun, Settings } from "lucide-react";
 import { categories } from "@/data/newsData";
+import { useAuth } from "@/hooks/useAuth";
 
 interface HeaderProps {
   darkMode: boolean;
@@ -21,7 +23,7 @@ const Header = ({
 }: HeaderProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
-
+  const { user, isAdmin } = useAuth();
   return (
     <header className="sticky top-0 z-50 bg-news-header text-news-header-foreground shadow-lg">
       {/* Top bar */}
@@ -64,6 +66,25 @@ const Header = ({
             >
               {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
             </button>
+
+            {/* Admin Link */}
+            {isAdmin && (
+              <Link
+                to="/admin"
+                className="flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-accent-foreground hover:bg-accent/90 transition-colors"
+              >
+                <Settings className="w-4 h-4" />
+                <span className="text-sm font-medium">অ্যাডমিন</span>
+              </Link>
+            )}
+            {!user && (
+              <Link
+                to="/auth"
+                className="px-4 py-2 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors text-sm font-medium"
+              >
+                লগইন
+              </Link>
+            )}
           </div>
 
           {/* Mobile Actions */}
