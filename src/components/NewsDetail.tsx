@@ -1,5 +1,7 @@
 import { NewsItem } from "@/data/newsData";
-import { ArrowLeft, Calendar, Clock, User, Facebook, Twitter, Share2 } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, User, Facebook, Twitter, Share2, Link2, Check } from "lucide-react";
+import { useState } from "react";
+import { useToast } from "@/hooks/use-toast";
 
 interface NewsDetailProps {
   news: NewsItem;
@@ -7,6 +9,9 @@ interface NewsDetailProps {
 }
 
 const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
+  const [copied, setCopied] = useState(false);
+  const { toast } = useToast();
+
   const shareOnFacebook = () => {
     window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href)}`, '_blank');
   };
@@ -17,6 +22,24 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
 
   const shareOnWhatsApp = () => {
     window.open(`https://wa.me/?text=${encodeURIComponent(news.title + ' ' + window.location.href)}`, '_blank');
+  };
+
+  const copyLink = async () => {
+    try {
+      await navigator.clipboard.writeText(window.location.href);
+      setCopied(true);
+      toast({
+        title: "লিংক কপি হয়েছে!",
+        description: "লিংকটি ক্লিপবোর্ডে কপি করা হয়েছে।",
+      });
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      toast({
+        title: "কপি করতে ব্যর্থ",
+        description: "লিংক কপি করা যায়নি।",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -93,6 +116,13 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
           aria-label="Share on WhatsApp"
         >
           <Share2 className="w-5 h-5" />
+        </button>
+        <button
+          onClick={copyLink}
+          className="p-2 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 transition-colors"
+          aria-label="Copy Link"
+        >
+          {copied ? <Check className="w-5 h-5 text-green-500" /> : <Link2 className="w-5 h-5" />}
         </button>
       </div>
 
