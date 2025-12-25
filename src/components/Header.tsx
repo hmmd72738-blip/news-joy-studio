@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Search, Menu, X, Moon, Sun, Settings, User } from "lucide-react";
+import logo from "@/assets/logo.png";
 import { categories } from "@/data/newsData";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -46,12 +47,11 @@ const Header = ({
           {/* Logo */}
           <div className="flex items-center gap-3">
             <div className="relative group">
-              <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-gold to-accent flex items-center justify-center transform transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3">
-                <span className="text-primary-foreground font-display text-2xl md:text-3xl font-bold">
-                  দ
-                </span>
-              </div>
-              <div className="absolute -inset-1 bg-gradient-to-r from-gold to-accent rounded-xl blur opacity-30 group-hover:opacity-50 transition-opacity" />
+              <img 
+                src={logo} 
+                alt="দৈনিক প্রতিদিন লোগো" 
+                className="w-12 h-12 md:w-14 md:h-14 rounded-xl object-contain transform transition-transform duration-300 group-hover:scale-105"
+              />
             </div>
             <div>
               <h1 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-news-header-foreground leading-tight">
