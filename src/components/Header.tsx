@@ -53,11 +53,11 @@ const Header = ({
               </div>
               <div className="absolute -inset-1 bg-gradient-to-r from-gold to-accent rounded-xl blur opacity-30 group-hover:opacity-50 transition-opacity" />
             </div>
-            <div className="hidden sm:block">
-              <h1 className="font-display text-xl md:text-2xl font-bold text-news-header-foreground leading-tight">
+            <div>
+              <h1 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-news-header-foreground leading-tight">
                 দৈনিক প্রতিদিন
               </h1>
-              <p className="text-[10px] md:text-xs text-news-header-foreground/60 tracking-wider uppercase">
+              <p className="hidden sm:block text-[10px] md:text-xs text-news-header-foreground/60 tracking-wider uppercase">
                 সত্য • নিরপেক্ষ • আধুনিক
               </p>
             </div>
