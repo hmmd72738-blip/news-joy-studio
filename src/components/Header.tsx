@@ -66,13 +66,13 @@ const Header = ({
   return (
     <header
       className={`premium-header transition-all duration-500 ${
-        scrolled ? "py-1 shadow-2xl" : "py-1.5"
+        scrolled ? "py-2 shadow-2xl" : "py-3"
       }`}
     >
       {/* Top Bar - Date & Time */}
       <div className={`border-b border-white/10 transition-all duration-300 ${scrolled ? 'hidden' : 'block'}`}>
         <div className="container">
-          <div className="flex items-center justify-between py-1 text-xs text-news-header-foreground/70">
+          <div className="flex items-center justify-between py-2 text-xs text-news-header-foreground/70">
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5" />
@@ -93,7 +93,7 @@ const Header = ({
 
       <div className="container">
         {/* Main Header Row */}
-        <div className="flex items-center justify-between gap-4 py-1">
+        <div className="flex items-center justify-between gap-4 py-3">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
             <div className="relative">
