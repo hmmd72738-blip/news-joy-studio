@@ -1,6 +1,10 @@
 import { useNews } from "@/hooks/useNews";
 import { Zap } from "lucide-react";
 
+interface BreakingNewsTickerProps {
+  hasBreakingNews?: (hasNews: boolean) => void;
+}
+
 const BreakingNewsTicker = () => {
   const { news } = useNews();
   
@@ -13,7 +17,7 @@ const BreakingNewsTicker = () => {
   }
 
   return (
-    <div className="breaking-ticker-container text-accent-foreground py-3 overflow-hidden mt-[140px] md:mt-[160px]">
+    <div className="breaking-ticker-container text-accent-foreground py-3 overflow-hidden">
       <div className="container flex items-center gap-4">
         {/* Breaking Badge */}
         <div className="flex-shrink-0 flex items-center gap-2 breaking-badge">
