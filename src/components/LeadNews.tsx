@@ -43,10 +43,12 @@ const LeadNews = ({ news, onReadMore }: LeadNewsProps) => {
             {news.title}
           </h2>
           
-          {/* Excerpt */}
-          <p className="hidden md:block text-white/80 text-lg mb-6 line-clamp-2 max-w-3xl animate-fade-in-up stagger-2">
-            {news.excerpt}
-          </p>
+          {/* Excerpt - Highlighted */}
+          <div className="hidden md:block mb-6 animate-fade-in-up stagger-2">
+            <p className="text-white/90 text-lg leading-relaxed line-clamp-2 max-w-3xl px-4 py-3 bg-white/10 backdrop-blur-sm rounded-lg border-l-4 border-gold">
+              {news.excerpt}
+            </p>
+          </div>
           
           {/* Meta Info */}
           <div className="flex flex-wrap items-center gap-4 text-white/70 text-sm animate-fade-in-up stagger-3">

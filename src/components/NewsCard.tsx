@@ -47,10 +47,12 @@ const NewsCard = ({ news, onReadMore }: NewsCardProps) => {
           {news.title}
         </h3>
         
-        {/* Excerpt */}
-        <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2 flex-1">
-          {news.excerpt}
-        </p>
+        {/* Excerpt - Highlighted */}
+        <div className="mb-4 flex-1">
+          <p className="text-muted-foreground text-sm leading-relaxed line-clamp-2 px-3 py-2 bg-muted/50 rounded-md border-l-2 border-accent">
+            {news.excerpt}
+          </p>
+        </div>
         
         {/* Footer */}
         <div className="flex items-center justify-between pt-4 border-t border-border/50">
