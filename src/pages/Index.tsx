@@ -93,7 +93,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pt-[120px] md:pt-[140px]">
       <Header
         darkMode={darkMode}
         toggleDarkMode={toggleDarkMode}
@@ -104,7 +104,7 @@ const Index = () => {
       />
       <BreakingNewsTicker />
 
-      <main className="container py-8">
+      <main className="container py-6">
         {loading ? (
           // Loading Skeleton
           <>
