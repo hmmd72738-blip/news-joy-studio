@@ -100,7 +100,7 @@ const Header = ({
               <img 
                 src={logo} 
                 alt="দৈনিক প্রতিদিন লোগো" 
-                className="w-10 h-10 md:w-12 md:h-12 rounded-xl object-contain transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
+                className="w-8 h-8 md:w-10 md:h-10 rounded-lg object-contain transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
               />
               <div className="absolute -inset-1 bg-gradient-to-r from-gold/30 to-accent/30 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
