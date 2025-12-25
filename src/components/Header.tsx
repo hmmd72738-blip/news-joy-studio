@@ -4,7 +4,7 @@ import {
   Search, Menu, X, Moon, Sun, Settings, User, TrendingUp, Clock,
   Home, Flag, Globe, Landmark, Trophy, Film, Cpu, MessageSquare
 } from "lucide-react";
-import logo from "@/assets/logo.png";
+import logo from "@/assets/new-logo.png";
 import { categories } from "@/data/newsData";
 import { useAuth } from "@/hooks/useAuth";
 
