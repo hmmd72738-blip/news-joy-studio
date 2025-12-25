@@ -1,4 +1,6 @@
 import { Facebook, Twitter, Youtube, Instagram, Mail, Phone, MapPin, ArrowUp } from "lucide-react";
+import { Link } from "react-router-dom";
+import { categories } from "@/data/newsData";
 
 const Footer = () => {
   const scrollToTop = () => {
@@ -66,15 +68,20 @@ const Footer = () => {
               দ্রুত লিংক
             </h4>
             <ul className="space-y-3">
-              {["আমাদের সম্পর্কে", "বিজ্ঞাপন", "গোপনীয়তা নীতি", "শর্তাবলী", "সংবাদদাতা হোন"].map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
+              {[
+                { name: "হোম", path: "/" },
+                { name: "আমাদের সম্পর্কে", path: "/" },
+                { name: "গোপনীয়তা নীতি", path: "/" },
+                { name: "শর্তাবলী", path: "/" },
+              ].map((item) => (
+                <li key={item.name}>
+                  <Link
+                    to={item.path}
                     className="text-news-header-foreground/70 hover:text-gold transition-colors duration-300 text-sm flex items-center gap-2 group"
                   >
                     <span className="w-0 group-hover:w-2 h-0.5 bg-gold transition-all duration-300" />
-                    {item}
-                  </a>
+                    {item.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -87,15 +94,15 @@ const Footer = () => {
               বিভাগসমূহ
             </h4>
             <ul className="space-y-3">
-              {["জাতীয়", "আন্তর্জাতিক", "রাজনীতি", "খেলাধুলা", "বিনোদন", "প্রযুক্তি"].map((item) => (
-                <li key={item}>
-                  <a
-                    href="#"
+              {categories.slice(1, 7).map((category) => (
+                <li key={category.slug}>
+                  <Link
+                    to={`/?category=${category.slug}`}
                     className="text-news-header-foreground/70 hover:text-gold transition-colors duration-300 text-sm flex items-center gap-2 group"
                   >
                     <span className="w-0 group-hover:w-2 h-0.5 bg-gold transition-all duration-300" />
-                    {item}
-                  </a>
+                    {category.name}
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -156,12 +163,12 @@ const Footer = () => {
               © ২০২৪ দৈনিক প্রতিদিন। সর্বস্বত্ব সংরক্ষিত।
             </p>
             <div className="flex items-center gap-6">
-              <a href="#" className="text-xs text-news-header-foreground/50 hover:text-gold transition-colors">
+              <Link to="/" className="text-xs text-news-header-foreground/50 hover:text-gold transition-colors">
                 গোপনীয়তা নীতি
-              </a>
-              <a href="#" className="text-xs text-news-header-foreground/50 hover:text-gold transition-colors">
+              </Link>
+              <Link to="/" className="text-xs text-news-header-foreground/50 hover:text-gold transition-colors">
                 ব্যবহারের শর্তাবলী
-              </a>
+              </Link>
               <button
                 onClick={scrollToTop}
                 className="p-2 rounded-full bg-white/5 hover:bg-gold text-news-header-foreground/70 hover:text-primary transition-all duration-300"
