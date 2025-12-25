@@ -4,7 +4,7 @@ import {
   Search, Menu, X, Moon, Sun, Settings, User, TrendingUp, Clock,
   Home, Flag, Globe, Landmark, Trophy, Film, Cpu, MessageSquare
 } from "lucide-react";
-import logo from "@/assets/logo.png";
+import headerTitle from "@/assets/header-title.png";
 import { categories } from "@/data/newsData";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -94,24 +94,13 @@ const Header = ({
       <div className="container">
         {/* Main Header Row */}
         <div className="flex items-center justify-between gap-4 py-2">
-          {/* Logo */}
-          <Link to="/" className="flex items-center gap-3 group">
-            <div className="relative">
-              <img 
-                src={logo} 
-                alt="দৈনিক প্রতিদিন লোগো" 
-                className="w-10 h-10 md:w-12 md:h-12 rounded-xl object-contain transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
-              />
-              <div className="absolute -inset-1 bg-gradient-to-r from-gold/30 to-accent/30 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </div>
-            <div>
-              <h1 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-news-header-foreground leading-tight group-hover:text-gold transition-colors duration-300">
-                দৈনিক প্রতিদিন
-              </h1>
-              <p className="hidden sm:block text-[10px] md:text-xs text-news-header-foreground/60 tracking-wider">
-                <span className="text-gold">সত্য</span> • <span className="text-accent">নিরপেক্ষ</span> • আধুনিক
-              </p>
-            </div>
+          {/* Header Title Image */}
+          <Link to="/" className="group">
+            <img 
+              src={headerTitle} 
+              alt="দৈনিক প্রতিদিন" 
+              className="h-12 sm:h-14 md:h-16 object-contain transform transition-all duration-300 group-hover:scale-105"
+            />
           </Link>
 
           {/* Desktop Search */}
