@@ -66,13 +66,13 @@ const Header = ({
   return (
     <header
       className={`premium-header transition-all duration-500 ${
-        scrolled ? "py-2 shadow-2xl" : "py-3"
+        scrolled ? "py-1 shadow-2xl" : "py-1.5"
       }`}
     >
       {/* Top Bar - Date & Time */}
       <div className={`border-b border-white/10 transition-all duration-300 ${scrolled ? 'hidden' : 'block'}`}>
         <div className="container">
-          <div className="flex items-center justify-between py-2 text-xs text-news-header-foreground/70">
+          <div className="flex items-center justify-between py-1 text-xs text-news-header-foreground/70">
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5" />
@@ -93,7 +93,7 @@ const Header = ({
 
       <div className="container">
         {/* Main Header Row */}
-        <div className="flex items-center justify-between gap-4 py-2">
+        <div className="flex items-center justify-between gap-4 py-1">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-3 group">
             <div className="relative">
@@ -235,7 +235,7 @@ const Header = ({
             mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 md:max-h-none opacity-0 md:opacity-100"
           }`}
         >
-          <div className="flex flex-wrap gap-1.5 md:gap-2 py-3 border-t border-white/10">
+          <div className="flex flex-wrap gap-1.5 md:gap-2 py-2 border-t border-white/10">
             {categories.map((category, index) => {
               const iconMap: { [key: string]: React.ReactNode } = {
                 Home: <Home className="w-4 h-4" />,
