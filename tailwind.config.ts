@@ -21,6 +21,7 @@ export default {
         bengali: ['"Noto Sans Bengali"', '"Hind Siliguri"', 'sans-serif'],
         serif: ['"Tiro Bangla"', '"Hind Siliguri"', 'serif'],
         display: ['"Baloo Da 2"', '"Noto Sans Bengali"', 'cursive'],
+        masthead: ['"Galada"', '"Tiro Bangla"', 'cursive'],
       },
       colors: {
         border: "hsl(var(--border))",
