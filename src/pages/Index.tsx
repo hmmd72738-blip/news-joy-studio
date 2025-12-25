@@ -93,7 +93,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background pt-[90px] md:pt-[105px]">
+    <div className="min-h-screen bg-background pt-[140px] md:pt-[160px]">
       <Header
         darkMode={darkMode}
         toggleDarkMode={toggleDarkMode}
