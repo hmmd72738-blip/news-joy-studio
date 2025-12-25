@@ -7,8 +7,11 @@ import Sidebar from "@/components/Sidebar";
 import NewsDetail from "@/components/NewsDetail";
 import ScrollToTop from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
+import NewsCardSkeleton from "@/components/NewsCardSkeleton";
+import LeadNewsSkeleton from "@/components/LeadNewsSkeleton";
 import { NewsItem, categories } from "@/data/newsData";
 import { useNews, DBNewsItem } from "@/hooks/useNews";
+import { Newspaper } from "lucide-react";
 
 // Helper to convert DB news to component NewsItem format
 const convertToNewsItem = (dbNews: DBNewsItem): NewsItem => {
@@ -24,7 +27,7 @@ const convertToNewsItem = (dbNews: DBNewsItem): NewsItem => {
   const categorySlug = categoryData?.slug || 'national';
   
   return {
-    id: dbNews.id as unknown as number, // Use string id
+    id: dbNews.id as unknown as number,
     title: dbNews.title,
     excerpt: dbNews.excerpt,
     content: dbNews.content,
@@ -89,17 +92,6 @@ const Index = () => {
     setSelectedNews(null);
   };
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="text-center">
-          <div className="w-12 h-12 border-4 border-accent border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-muted-foreground">সংবাদ লোড হচ্ছে...</p>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-background">
       <Header
@@ -113,7 +105,44 @@ const Index = () => {
       <BreakingNewsTicker />
 
       <main className="container py-8">
-        {selectedNews ? (
+        {loading ? (
+          // Loading Skeleton
+          <>
+            <section className="mb-8">
+              <LeadNewsSkeleton />
+            </section>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2">
+                <div className="flex items-center justify-between mb-6">
+                  <div className="skeleton h-8 w-40 rounded" />
+                  <div className="h-1 flex-1 ml-4 bg-gradient-to-r from-accent to-transparent rounded-full" />
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  {[1, 2, 3, 4].map((i) => (
+                    <NewsCardSkeleton key={i} />
+                  ))}
+                </div>
+              </div>
+              <div className="lg:col-span-1">
+                <div className="glass rounded-2xl p-6">
+                  <div className="skeleton h-6 w-32 rounded mb-6" />
+                  <div className="space-y-4">
+                    {[1, 2, 3, 4, 5].map((i) => (
+                      <div key={i} className="flex gap-4">
+                        <div className="skeleton w-10 h-10 rounded-xl" />
+                        <div className="flex-1 space-y-2">
+                          <div className="skeleton h-4 w-full rounded" />
+                          <div className="skeleton h-3 w-20 rounded" />
+                        </div>
+                        <div className="skeleton w-16 h-16 rounded-xl" />
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </>
+        ) : selectedNews ? (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
               <NewsDetail news={selectedNews} onBack={handleBack} />
@@ -125,22 +154,22 @@ const Index = () => {
         ) : (
           <>
             {/* Lead News */}
-            {leadNews && (
-              <section className="mb-8">
+            {leadNews ? (
+              <section className="mb-10 animate-fade-in-up">
                 <LeadNews news={leadNews} onReadMore={handleReadMore} />
               </section>
-            )}
+            ) : null}
 
             {/* Main Content Grid */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
               {/* News Grid */}
               <div className="lg:col-span-2">
-                <div className="flex items-center justify-between mb-6">
-                  <h2 className="text-2xl font-bold text-foreground">
+                <div className="section-divider mb-8">
+                  <h2 className="font-display text-2xl font-bold text-foreground flex items-center gap-3">
+                    <Newspaper className="w-6 h-6 text-accent" />
                     {activeCategory === "home" ? "সর্বশেষ সংবাদ" : 
                       newsData.find(n => n.categorySlug === activeCategory)?.category || "সর্বশেষ সংবাদ"}
                   </h2>
-                  <div className="h-1 flex-1 ml-4 bg-gradient-to-r from-accent to-transparent rounded-full" />
                 </div>
 
                 {otherNews.length > 0 ? (
@@ -156,8 +185,16 @@ const Index = () => {
                     ))}
                   </div>
                 ) : (
-                  <div className="text-center py-12 text-muted-foreground">
-                    <p>কোনো সংবাদ পাওয়া যায়নি।</p>
+                  <div className="text-center py-16">
+                    <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-muted flex items-center justify-center">
+                      <Newspaper className="w-10 h-10 text-muted-foreground" />
+                    </div>
+                    <p className="text-muted-foreground font-display text-lg">
+                      কোনো সংবাদ পাওয়া যায়নি।
+                    </p>
+                    <p className="text-muted-foreground/70 text-sm mt-2">
+                      অন্য বিভাগে খুঁজে দেখুন অথবা পরে আবার চেষ্টা করুন।
+                    </p>
                   </div>
                 )}
               </div>

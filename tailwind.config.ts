@@ -18,9 +18,9 @@ export default {
     },
     extend: {
       fontFamily: {
-        bengali: ['"Hind Siliguri"', '"Noto Sans Bengali"', 'sans-serif'],
+        bengali: ['"Noto Sans Bengali"', '"Hind Siliguri"', 'sans-serif'],
         serif: ['"Tiro Bangla"', '"Hind Siliguri"', 'serif'],
-        display: ['"Baloo Da 2"', '"Hind Siliguri"', 'cursive'],
+        display: ['"Baloo Da 2"', '"Noto Sans Bengali"', 'cursive'],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -55,6 +55,10 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        gold: {
+          DEFAULT: "hsl(var(--gold))",
+          foreground: "hsl(var(--gold-foreground))",
         },
         news: {
           header: "hsl(var(--news-header))",
@@ -94,21 +98,36 @@ export default {
           "0%": { opacity: "0", transform: "translateY(30px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        "fade-in-down": {
+          "0%": { opacity: "0", transform: "translateY(-20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
         "fade-in-scale": {
           "0%": { opacity: "0", transform: "scale(0.95)" },
           "100%": { opacity: "1", transform: "scale(1)" },
         },
         "slide-in-right": {
-          "0%": { opacity: "0", transform: "translateX(30px)" },
+          "0%": { opacity: "0", transform: "translateX(50px)" },
           "100%": { opacity: "1", transform: "translateX(0)" },
+        },
+        "pulse-glow": {
+          "0%, 100%": { opacity: "1", boxShadow: "0 0 5px hsla(352, 78%, 50%, 0.3)" },
+          "50%": { opacity: "0.9", boxShadow: "0 0 25px hsla(352, 78%, 50%, 0.5)" },
+        },
+        shimmer: {
+          "0%": { transform: "translateX(-100%)" },
+          "100%": { transform: "translateX(100%)" },
         },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         "fade-in-up": "fade-in-up 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards",
+        "fade-in-down": "fade-in-down 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards",
         "fade-in-scale": "fade-in-scale 0.4s ease-out forwards",
         "slide-in-right": "slide-in-right 0.5s ease-out forwards",
+        "pulse-glow": "pulse-glow 2s ease-in-out infinite",
+        shimmer: "shimmer 1.5s infinite",
       },
     },
   },
