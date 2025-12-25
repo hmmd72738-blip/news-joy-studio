@@ -4,7 +4,7 @@ import {
   Search, Menu, X, Moon, Sun, Settings, User, TrendingUp, Clock,
   Home, Flag, Globe, Landmark, Trophy, Film, Cpu, MessageSquare
 } from "lucide-react";
-import logoBrand from "@/assets/logo-brand.png";
+import logo from "@/assets/logo.png";
 import { categories } from "@/data/newsData";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -66,13 +66,13 @@ const Header = ({
   return (
     <header
       className={`premium-header transition-all duration-500 ${
-        scrolled ? "py-1 shadow-2xl" : "py-1"
+        scrolled ? "py-2 shadow-2xl" : "py-3"
       }`}
     >
       {/* Top Bar - Date & Time */}
-      <div className={`border-b border-border/30 transition-all duration-300 ${scrolled ? 'hidden' : 'block'}`}>
+      <div className={`border-b border-white/10 transition-all duration-300 ${scrolled ? 'hidden' : 'block'}`}>
         <div className="container">
-          <div className="flex items-center justify-between py-1 text-xs text-news-header-foreground/70">
+          <div className="flex items-center justify-between py-2 text-xs text-news-header-foreground/70">
             <div className="flex items-center gap-4">
               <span className="flex items-center gap-1.5">
                 <Clock className="w-3.5 h-3.5" />
@@ -93,22 +93,34 @@ const Header = ({
 
       <div className="container">
         {/* Main Header Row */}
-        <div className="flex items-center justify-center py-2 md:py-3">
-          {/* Header Logo Image */}
-          <Link to="/" className="group">
-            <img 
-              src={logoBrand} 
-              alt="দৈনিক প্রতিদিন" 
-              className="h-12 sm:h-14 md:h-16 lg:h-20 object-contain transform transition-all duration-300 group-hover:scale-[1.02]"
-            />
+        <div className="flex items-center justify-between gap-4 py-2">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-3 group">
+            <div className="relative">
+              <img 
+                src={logo} 
+                alt="দৈনিক প্রতিদিন লোগো" 
+                className="w-10 h-10 md:w-12 md:h-12 rounded-xl object-contain transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
+              />
+              <div className="absolute -inset-1 bg-gradient-to-r from-gold/30 to-accent/30 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </div>
+            <div>
+              <h1 className="font-display text-lg sm:text-xl md:text-2xl font-bold text-news-header-foreground leading-tight group-hover:text-gold transition-colors duration-300">
+                দৈনিক প্রতিদিন
+              </h1>
+              <p className="hidden sm:block text-[10px] md:text-xs text-news-header-foreground/60 tracking-wider">
+                <span className="text-gold">সত্য</span> • <span className="text-accent">নিরপেক্ষ</span> • আধুনিক
+              </p>
+            </div>
           </Link>
-        </div>
 
-        {/* Actions Row */}
-        <div className="flex items-center justify-between pb-2">
           {/* Desktop Search */}
-          <div className="hidden lg:flex flex-1 max-w-md">
-            <div className={`relative w-full transition-all duration-300 ${searchOpen ? "scale-105" : ""}`}>
+          <div className="hidden lg:flex flex-1 max-w-lg mx-8">
+            <div
+              className={`relative w-full transition-all duration-300 ${
+                searchOpen ? "scale-105" : ""
+              }`}
+            >
               <input
                 type="text"
                 placeholder="সংবাদ খুঁজুন..."
@@ -116,13 +128,13 @@ const Header = ({
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => setSearchOpen(true)}
                 onBlur={() => setSearchOpen(false)}
-                className="w-full py-2 px-4 pl-10 rounded-xl bg-muted border border-border text-news-header-foreground placeholder:text-muted-foreground focus:outline-none focus:border-gold/50 focus:ring-2 focus:ring-gold/20 transition-all duration-300 text-sm"
+                className="w-full py-3 px-5 pl-12 rounded-2xl bg-white/10 border border-white/10 text-news-header-foreground placeholder:text-news-header-foreground/50 focus:outline-none focus:border-gold/50 focus:bg-white/15 focus:ring-2 focus:ring-gold/20 transition-all duration-300"
               />
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-news-header-foreground/50" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-news-header-foreground/50" />
               {searchQuery && (
                 <button 
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-news-header-foreground/50 hover:text-news-header-foreground transition-colors"
+                  className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-news-header-foreground/50 hover:text-news-header-foreground transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -130,75 +142,74 @@ const Header = ({
             </div>
           </div>
 
-          {/* Spacer */}
-          <div className="hidden lg:block flex-1"></div>
-
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-2">
+          <div className="hidden md:flex items-center gap-3">
             {isAdmin && (
               <Link
                 to="/admin"
-                className="group relative p-2 rounded-lg bg-gradient-to-r from-gold/20 to-accent/20 text-news-header-foreground hover:from-gold/30 hover:to-accent/30 transition-all duration-300"
+                className="group relative p-3 rounded-xl bg-gradient-to-r from-gold/20 to-accent/20 text-news-header-foreground hover:from-gold/30 hover:to-accent/30 transition-all duration-300"
                 title="অ্যাডমিন প্যানেল"
               >
-                <Settings className="w-4 h-4 group-hover:rotate-90 transition-transform duration-500" />
+                <Settings className="w-5 h-5 group-hover:rotate-90 transition-transform duration-500" />
               </Link>
             )}
 
             {!user && (
               <Link
                 to="/auth"
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-accent to-accent/80 text-white font-medium hover:shadow-lg hover:shadow-accent/30 transition-all duration-300 text-sm"
+                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-accent to-accent/80 text-white font-medium hover:shadow-lg hover:shadow-accent/30 transition-all duration-300"
                 title="লগইন"
               >
-                <User className="w-3.5 h-3.5" />
-                <span>লগইন</span>
+                <User className="w-4 h-4" />
+                <span className="text-sm">লগইন</span>
               </Link>
             )}
 
             <button
               onClick={toggleDarkMode}
-              className="relative p-2 rounded-lg bg-muted text-news-header-foreground hover:bg-muted/80 transition-all duration-300 overflow-hidden group"
+              className="relative p-3 rounded-xl bg-white/10 text-news-header-foreground hover:bg-white/20 transition-all duration-300 overflow-hidden group"
               aria-label={darkMode ? "লাইট মোড" : "ডার্ক মোড"}
             >
-              {darkMode ? (
-                <Sun className="w-4 h-4 text-gold group-hover:rotate-180 transition-transform duration-500" />
-              ) : (
-                <Moon className="w-4 h-4 group-hover:-rotate-12 transition-transform duration-300" />
-              )}
+              <div className="relative z-10">
+                {darkMode ? (
+                  <Sun className="w-5 h-5 text-gold group-hover:rotate-180 transition-transform duration-500" />
+                ) : (
+                  <Moon className="w-5 h-5 group-hover:-rotate-12 transition-transform duration-300" />
+                )}
+              </div>
             </button>
           </div>
 
           {/* Mobile Actions */}
-          <div className="flex md:hidden items-center gap-1.5">
+          <div className="flex md:hidden items-center gap-2">
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className={`p-2 rounded-lg transition-all duration-300 ${
-                searchOpen ? 'bg-gold/20 text-gold' : 'bg-muted text-news-header-foreground'
+              className={`p-2.5 rounded-xl transition-all duration-300 ${
+                searchOpen ? 'bg-gold/20 text-gold' : 'bg-white/10 text-news-header-foreground'
               }`}
             >
-              <Search className="w-4 h-4" />
+              <Search className="w-5 h-5" />
             </button>
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-lg bg-muted text-news-header-foreground"
+              className="p-2.5 rounded-xl bg-white/10 text-news-header-foreground"
             >
               {darkMode ? (
-                <Sun className="w-4 h-4 text-gold" />
+                <Sun className="w-5 h-5 text-gold" />
               ) : (
-                <Moon className="w-4 h-4" />
+                <Moon className="w-5 h-5" />
               )}
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`p-2 rounded-lg transition-all duration-300 ${
-                mobileMenuOpen ? 'bg-accent/20 text-accent' : 'bg-muted text-news-header-foreground'
+              className={`p-2.5 rounded-xl transition-all duration-300 ${
+                mobileMenuOpen ? 'bg-accent/20 text-accent' : 'bg-white/10 text-news-header-foreground'
               }`}
             >
               {mobileMenuOpen ? (
-                <X className="w-4 h-4" />
+                <X className="w-5 h-5" />
               ) : (
-                <Menu className="w-4 h-4" />
+                <Menu className="w-5 h-5" />
               )}
             </button>
           </div>
@@ -212,7 +223,7 @@ const Header = ({
               placeholder="সংবাদ খুঁজুন..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full py-3 px-4 pl-11 rounded-xl bg-muted border border-border text-news-header-foreground placeholder:text-muted-foreground focus:outline-none focus:border-gold/50"
+              className="w-full py-3 px-4 pl-11 rounded-xl bg-white/10 border border-white/10 text-news-header-foreground placeholder:text-news-header-foreground/50 focus:outline-none focus:border-gold/50"
             />
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-news-header-foreground/50" />
           </div>
@@ -224,7 +235,7 @@ const Header = ({
             mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 md:max-h-none opacity-0 md:opacity-100"
           }`}
         >
-          <div className="flex flex-wrap gap-1 md:gap-1.5 py-2 border-t border-border/50">
+          <div className="flex flex-wrap gap-1.5 md:gap-2 py-3 border-t border-white/10">
             {categories.map((category, index) => {
               const iconMap: { [key: string]: React.ReactNode } = {
                 Home: <Home className="w-4 h-4" />,
@@ -248,7 +259,7 @@ const Header = ({
                   className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
                     activeCategory === category.slug
                       ? "bg-gradient-to-r from-gold via-gold/90 to-accent text-primary-foreground shadow-lg shadow-gold/20 scale-105"
-                      : "text-news-header-foreground/80 hover:bg-muted hover:text-news-header-foreground hover:scale-105"
+                      : "text-news-header-foreground/80 hover:bg-white/10 hover:text-news-header-foreground hover:scale-105"
                   }`}
                   style={{
                     animationDelay: `${index * 50}ms`
@@ -261,7 +272,7 @@ const Header = ({
             })}
             
             {/* Mobile Admin/Auth Links */}
-            <div className="md:hidden w-full flex gap-2 mt-3 pt-3 border-t border-border/50">
+            <div className="md:hidden w-full flex gap-2 mt-3 pt-3 border-t border-white/10">
               {isAdmin ? (
                 <Link
                   to="/admin"
