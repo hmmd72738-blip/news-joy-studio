@@ -45,8 +45,8 @@
   --gold-foreground: 222 47% 11%;
   
   /* News Specific */
-  --news-header: 230 78% 11%;
-  --news-header-foreground: 0 0% 100%;
+  --news-header: 0 0% 100%;
+  --news-header-foreground: 222 47% 11%;
   --news-breaking: 352 78% 50%;
   --news-breaking-foreground: 0 0% 100%;
   --news-category: 230 60% 25%;
@@ -173,12 +173,15 @@
   /* Premium Header */
   .premium-header {
     @apply fixed top-0 left-0 right-0 z-50;
-    background: linear-gradient(
-      180deg,
-      hsl(var(--news-header)) 0%,
-      hsl(var(--news-header) / 0.98) 100%
-    );
+    background: hsl(0 0% 100%);
     backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 
+      0 1px 0 hsla(0, 0%, 0%, 0.05),
+      0 4px 20px hsla(var(--primary), 0.1);
+  }
+  
+  .dark .premium-header {
+    background: hsl(var(--news-header));
     box-shadow: 
       0 1px 0 hsla(0, 0%, 100%, 0.05),
       0 4px 20px hsla(var(--primary), 0.2);

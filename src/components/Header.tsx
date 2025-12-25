@@ -70,7 +70,7 @@ const Header = ({
       }`}
     >
       {/* Top Bar - Date & Time */}
-      <div className={`border-b border-white/10 transition-all duration-300 ${scrolled ? 'hidden' : 'block'}`}>
+      <div className={`border-b border-border/30 transition-all duration-300 ${scrolled ? 'hidden' : 'block'}`}>
         <div className="container">
           <div className="flex items-center justify-between py-2 text-xs text-news-header-foreground/70">
             <div className="flex items-center gap-4">
@@ -128,7 +128,7 @@ const Header = ({
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => setSearchOpen(true)}
                 onBlur={() => setSearchOpen(false)}
-                className="w-full py-3 px-5 pl-12 rounded-2xl bg-white/10 border border-white/10 text-news-header-foreground placeholder:text-news-header-foreground/50 focus:outline-none focus:border-gold/50 focus:bg-white/15 focus:ring-2 focus:ring-gold/20 transition-all duration-300"
+                className="w-full py-3 px-5 pl-12 rounded-2xl bg-muted border border-border text-news-header-foreground placeholder:text-muted-foreground focus:outline-none focus:border-gold/50 focus:ring-2 focus:ring-gold/20 transition-all duration-300"
               />
               <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-news-header-foreground/50" />
               {searchQuery && (
@@ -167,7 +167,7 @@ const Header = ({
 
             <button
               onClick={toggleDarkMode}
-              className="relative p-3 rounded-xl bg-white/10 text-news-header-foreground hover:bg-white/20 transition-all duration-300 overflow-hidden group"
+              className="relative p-3 rounded-xl bg-muted text-news-header-foreground hover:bg-muted/80 transition-all duration-300 overflow-hidden group"
               aria-label={darkMode ? "লাইট মোড" : "ডার্ক মোড"}
             >
               <div className="relative z-10">
@@ -185,14 +185,14 @@ const Header = ({
             <button
               onClick={() => setSearchOpen(!searchOpen)}
               className={`p-2.5 rounded-xl transition-all duration-300 ${
-                searchOpen ? 'bg-gold/20 text-gold' : 'bg-white/10 text-news-header-foreground'
+                searchOpen ? 'bg-gold/20 text-gold' : 'bg-muted text-news-header-foreground'
               }`}
             >
               <Search className="w-5 h-5" />
             </button>
             <button
               onClick={toggleDarkMode}
-              className="p-2.5 rounded-xl bg-white/10 text-news-header-foreground"
+              className="p-2.5 rounded-xl bg-muted text-news-header-foreground"
             >
               {darkMode ? (
                 <Sun className="w-5 h-5 text-gold" />
@@ -203,7 +203,7 @@ const Header = ({
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               className={`p-2.5 rounded-xl transition-all duration-300 ${
-                mobileMenuOpen ? 'bg-accent/20 text-accent' : 'bg-white/10 text-news-header-foreground'
+                mobileMenuOpen ? 'bg-accent/20 text-accent' : 'bg-muted text-news-header-foreground'
               }`}
             >
               {mobileMenuOpen ? (
@@ -223,7 +223,7 @@ const Header = ({
               placeholder="সংবাদ খুঁজুন..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full py-3 px-4 pl-11 rounded-xl bg-white/10 border border-white/10 text-news-header-foreground placeholder:text-news-header-foreground/50 focus:outline-none focus:border-gold/50"
+              className="w-full py-3 px-4 pl-11 rounded-xl bg-muted border border-border text-news-header-foreground placeholder:text-muted-foreground focus:outline-none focus:border-gold/50"
             />
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-5 h-5 text-news-header-foreground/50" />
           </div>
@@ -235,7 +235,7 @@ const Header = ({
             mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 md:max-h-none opacity-0 md:opacity-100"
           }`}
         >
-          <div className="flex flex-wrap gap-1.5 md:gap-2 py-3 border-t border-white/10">
+          <div className="flex flex-wrap gap-1.5 md:gap-2 py-3 border-t border-border/50">
             {categories.map((category, index) => {
               const iconMap: { [key: string]: React.ReactNode } = {
                 Home: <Home className="w-4 h-4" />,
@@ -259,7 +259,7 @@ const Header = ({
                   className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
                     activeCategory === category.slug
                       ? "bg-gradient-to-r from-gold via-gold/90 to-accent text-primary-foreground shadow-lg shadow-gold/20 scale-105"
-                      : "text-news-header-foreground/80 hover:bg-white/10 hover:text-news-header-foreground hover:scale-105"
+                      : "text-news-header-foreground/80 hover:bg-muted hover:text-news-header-foreground hover:scale-105"
                   }`}
                   style={{
                     animationDelay: `${index * 50}ms`
@@ -272,7 +272,7 @@ const Header = ({
             })}
             
             {/* Mobile Admin/Auth Links */}
-            <div className="md:hidden w-full flex gap-2 mt-3 pt-3 border-t border-white/10">
+            <div className="md:hidden w-full flex gap-2 mt-3 pt-3 border-t border-border/50">
               {isAdmin ? (
                 <Link
                   to="/admin"
