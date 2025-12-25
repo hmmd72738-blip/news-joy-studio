@@ -1,4 +1,5 @@
 import { useNews } from "@/hooks/useNews";
+import { Zap } from "lucide-react";
 
 const BreakingNewsTicker = () => {
   const { news } = useNews();
@@ -12,21 +13,32 @@ const BreakingNewsTicker = () => {
   }
 
   return (
-    <div className="bg-accent text-accent-foreground py-2 overflow-hidden">
+    <div className="breaking-ticker-container text-accent-foreground py-3 overflow-hidden mt-[140px] md:mt-[160px]">
       <div className="container flex items-center gap-4">
-        <span className="flex-shrink-0 px-3 py-1 bg-primary-foreground/20 rounded font-bold text-sm animate-pulse-glow">
-          ব্রেকিং
-        </span>
-        <div className="overflow-hidden flex-1">
-          <div className="breaking-ticker whitespace-nowrap">
-            {breakingNews.map((news, index) => (
-              <span key={index} className="inline-block mx-8">
-                • {news}
+        {/* Breaking Badge */}
+        <div className="flex-shrink-0 flex items-center gap-2 breaking-badge">
+          <Zap className="w-4 h-4" />
+          <span className="font-display font-bold text-sm">ব্রেকিং</span>
+        </div>
+        
+        {/* Ticker */}
+        <div className="overflow-hidden flex-1 relative">
+          {/* Fade edges */}
+          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-accent to-transparent z-10" />
+          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-accent to-transparent z-10" />
+          
+          <div className="breaking-ticker whitespace-nowrap flex">
+            {breakingNews.map((title, index) => (
+              <span key={index} className="inline-flex items-center mx-8 font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold mr-3 animate-pulse" />
+                {title}
               </span>
             ))}
-            {breakingNews.map((news, index) => (
-              <span key={`repeat-${index}`} className="inline-block mx-8">
-                • {news}
+            {/* Duplicate for seamless loop */}
+            {breakingNews.map((title, index) => (
+              <span key={`repeat-${index}`} className="inline-flex items-center mx-8 font-medium">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold mr-3 animate-pulse" />
+                {title}
               </span>
             ))}
           </div>
