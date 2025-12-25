@@ -50,7 +50,7 @@ const Header = ({
               <img 
                 src={logo} 
                 alt="দৈনিক প্রতিদিন লোগো" 
-                className="w-12 h-12 md:w-14 md:h-14 rounded-xl object-contain transform transition-transform duration-300 group-hover:scale-105"
+                className="w-9 h-9 md:w-10 md:h-10 rounded-lg object-contain transform transition-transform duration-300 group-hover:scale-105"
               />
             </div>
             <div>
