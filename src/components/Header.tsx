@@ -93,23 +93,22 @@ const Header = ({
 
       <div className="container">
         {/* Main Header Row */}
-        <div className="flex items-center justify-between py-4 md:py-6">
+        <div className="flex items-center justify-center py-2 md:py-3">
           {/* Header Logo Image */}
-          <Link to="/" className="group flex-1 flex justify-center md:justify-start">
+          <Link to="/" className="group">
             <img 
               src={logoBrand} 
               alt="দৈনিক প্রতিদিন" 
-              className="h-16 sm:h-20 md:h-24 lg:h-28 object-contain transform transition-all duration-300 group-hover:scale-[1.02]"
+              className="h-12 sm:h-14 md:h-16 lg:h-20 object-contain transform transition-all duration-300 group-hover:scale-[1.02]"
             />
           </Link>
+        </div>
 
+        {/* Actions Row */}
+        <div className="flex items-center justify-between pb-2">
           {/* Desktop Search */}
-          <div className="hidden lg:flex flex-1 max-w-lg mx-8">
-            <div
-              className={`relative w-full transition-all duration-300 ${
-                searchOpen ? "scale-105" : ""
-              }`}
-            >
+          <div className="hidden lg:flex flex-1 max-w-md">
+            <div className={`relative w-full transition-all duration-300 ${searchOpen ? "scale-105" : ""}`}>
               <input
                 type="text"
                 placeholder="সংবাদ খুঁজুন..."
@@ -117,13 +116,13 @@ const Header = ({
                 onChange={(e) => setSearchQuery(e.target.value)}
                 onFocus={() => setSearchOpen(true)}
                 onBlur={() => setSearchOpen(false)}
-                className="w-full py-3 px-5 pl-12 rounded-2xl bg-muted border border-border text-news-header-foreground placeholder:text-muted-foreground focus:outline-none focus:border-gold/50 focus:ring-2 focus:ring-gold/20 transition-all duration-300"
+                className="w-full py-2 px-4 pl-10 rounded-xl bg-muted border border-border text-news-header-foreground placeholder:text-muted-foreground focus:outline-none focus:border-gold/50 focus:ring-2 focus:ring-gold/20 transition-all duration-300 text-sm"
               />
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-news-header-foreground/50" />
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-news-header-foreground/50" />
               {searchQuery && (
                 <button 
                   onClick={() => setSearchQuery('')}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 w-5 h-5 text-news-header-foreground/50 hover:text-news-header-foreground transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-news-header-foreground/50 hover:text-news-header-foreground transition-colors"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -131,74 +130,75 @@ const Header = ({
             </div>
           </div>
 
+          {/* Spacer */}
+          <div className="hidden lg:block flex-1"></div>
+
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-3">
+          <div className="hidden md:flex items-center gap-2">
             {isAdmin && (
               <Link
                 to="/admin"
-                className="group relative p-3 rounded-xl bg-gradient-to-r from-gold/20 to-accent/20 text-news-header-foreground hover:from-gold/30 hover:to-accent/30 transition-all duration-300"
+                className="group relative p-2 rounded-lg bg-gradient-to-r from-gold/20 to-accent/20 text-news-header-foreground hover:from-gold/30 hover:to-accent/30 transition-all duration-300"
                 title="অ্যাডমিন প্যানেল"
               >
-                <Settings className="w-5 h-5 group-hover:rotate-90 transition-transform duration-500" />
+                <Settings className="w-4 h-4 group-hover:rotate-90 transition-transform duration-500" />
               </Link>
             )}
 
             {!user && (
               <Link
                 to="/auth"
-                className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-accent to-accent/80 text-white font-medium hover:shadow-lg hover:shadow-accent/30 transition-all duration-300"
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-gradient-to-r from-accent to-accent/80 text-white font-medium hover:shadow-lg hover:shadow-accent/30 transition-all duration-300 text-sm"
                 title="লগইন"
               >
-                <User className="w-4 h-4" />
-                <span className="text-sm">লগইন</span>
+                <User className="w-3.5 h-3.5" />
+                <span>লগইন</span>
               </Link>
             )}
 
             <button
               onClick={toggleDarkMode}
-              className="relative p-3 rounded-xl bg-muted text-news-header-foreground hover:bg-muted/80 transition-all duration-300 overflow-hidden group"
+              className="relative p-2 rounded-lg bg-muted text-news-header-foreground hover:bg-muted/80 transition-all duration-300 overflow-hidden group"
               aria-label={darkMode ? "লাইট মোড" : "ডার্ক মোড"}
             >
-              <div className="relative z-10">
-                {darkMode ? (
-                  <Sun className="w-5 h-5 text-gold group-hover:rotate-180 transition-transform duration-500" />
-                ) : (
-                  <Moon className="w-5 h-5 group-hover:-rotate-12 transition-transform duration-300" />
-                )}
-              </div>
+              {darkMode ? (
+                <Sun className="w-4 h-4 text-gold group-hover:rotate-180 transition-transform duration-500" />
+              ) : (
+                <Moon className="w-4 h-4 group-hover:-rotate-12 transition-transform duration-300" />
+              )}
             </button>
           </div>
 
           {/* Mobile Actions */}
-          <div className="flex md:hidden items-center gap-2">
+          <div className="flex md:hidden items-center gap-1.5">
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className={`p-2.5 rounded-xl transition-all duration-300 ${
+              className={`p-2 rounded-lg transition-all duration-300 ${
                 searchOpen ? 'bg-gold/20 text-gold' : 'bg-muted text-news-header-foreground'
               }`}
             >
-              <Search className="w-5 h-5" />
+              <Search className="w-4 h-4" />
             </button>
             <button
               onClick={toggleDarkMode}
-              className="p-2.5 rounded-xl bg-muted text-news-header-foreground"
+              className="p-2 rounded-lg bg-muted text-news-header-foreground"
             >
               {darkMode ? (
-                <Sun className="w-5 h-5 text-gold" />
+                <Sun className="w-4 h-4 text-gold" />
               ) : (
-                <Moon className="w-5 h-5" />
+                <Moon className="w-4 h-4" />
               )}
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className={`p-2.5 rounded-xl transition-all duration-300 ${
+              className={`p-2 rounded-lg transition-all duration-300 ${
                 mobileMenuOpen ? 'bg-accent/20 text-accent' : 'bg-muted text-news-header-foreground'
               }`}
             >
               {mobileMenuOpen ? (
-                <X className="w-5 h-5" />
+                <X className="w-4 h-4" />
               ) : (
-                <Menu className="w-5 h-5" />
+                <Menu className="w-4 h-4" />
               )}
             </button>
           </div>
