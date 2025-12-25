@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Search, Menu, X, Moon, Sun, Settings, User, TrendingUp, Clock } from "lucide-react";
+import { 
+  Search, Menu, X, Moon, Sun, Settings, User, TrendingUp, Clock,
+  Home, Flag, Globe, Landmark, Trophy, Film, Cpu, MessageSquare
+} from "lucide-react";
 import logo from "@/assets/logo.png";
 import { categories } from "@/data/newsData";
 import { useAuth } from "@/hooks/useAuth";
@@ -233,25 +236,40 @@ const Header = ({
           }`}
         >
           <div className="flex flex-wrap gap-1.5 md:gap-2 py-3 border-t border-white/10">
-            {categories.map((category, index) => (
-              <button
-                key={category.slug}
-                onClick={() => {
-                  setActiveCategory(category.slug);
-                  setMobileMenuOpen(false);
-                }}
-                className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
-                  activeCategory === category.slug
-                    ? "bg-gradient-to-r from-gold via-gold/90 to-accent text-primary-foreground shadow-lg shadow-gold/20 scale-105"
-                    : "text-news-header-foreground/80 hover:bg-white/10 hover:text-news-header-foreground hover:scale-105"
-                }`}
-                style={{
-                  animationDelay: `${index * 50}ms`
-                }}
-              >
-                {category.name}
-              </button>
-            ))}
+            {categories.map((category, index) => {
+              const iconMap: { [key: string]: React.ReactNode } = {
+                Home: <Home className="w-4 h-4" />,
+                Flag: <Flag className="w-4 h-4" />,
+                Globe: <Globe className="w-4 h-4" />,
+                Landmark: <Landmark className="w-4 h-4" />,
+                Trophy: <Trophy className="w-4 h-4" />,
+                Film: <Film className="w-4 h-4" />,
+                Cpu: <Cpu className="w-4 h-4" />,
+                Moon: <Moon className="w-4 h-4" />,
+                MessageSquare: <MessageSquare className="w-4 h-4" />,
+              };
+              
+              return (
+                <button
+                  key={category.slug}
+                  onClick={() => {
+                    setActiveCategory(category.slug);
+                    setMobileMenuOpen(false);
+                  }}
+                  className={`flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
+                    activeCategory === category.slug
+                      ? "bg-gradient-to-r from-gold via-gold/90 to-accent text-primary-foreground shadow-lg shadow-gold/20 scale-105"
+                      : "text-news-header-foreground/80 hover:bg-white/10 hover:text-news-header-foreground hover:scale-105"
+                  }`}
+                  style={{
+                    animationDelay: `${index * 50}ms`
+                  }}
+                >
+                  {iconMap[category.icon]}
+                  {category.name}
+                </button>
+              );
+            })}
             
             {/* Mobile Admin/Auth Links */}
             <div className="md:hidden w-full flex gap-2 mt-3 pt-3 border-t border-white/10">

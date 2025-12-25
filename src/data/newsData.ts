@@ -14,15 +14,15 @@ export interface NewsItem {
 }
 
 export const categories = [
-  { name: "হোম", slug: "home" },
-  { name: "জাতীয়", slug: "national" },
-  { name: "আন্তর্জাতিক", slug: "international" },
-  { name: "রাজনীতি", slug: "politics" },
-  { name: "খেলাধুলা", slug: "sports" },
-  { name: "বিনোদন", slug: "entertainment" },
-  { name: "প্রযুক্তি", slug: "technology" },
-  { name: "ইসলামিক", slug: "islamic" },
-  { name: "মতামত", slug: "opinion" },
+  { name: "হোম", slug: "home", icon: "Home" },
+  { name: "জাতীয়", slug: "national", icon: "Flag" },
+  { name: "আন্তর্জাতিক", slug: "international", icon: "Globe" },
+  { name: "রাজনীতি", slug: "politics", icon: "Landmark" },
+  { name: "খেলাধুলা", slug: "sports", icon: "Trophy" },
+  { name: "বিনোদন", slug: "entertainment", icon: "Film" },
+  { name: "প্রযুক্তি", slug: "technology", icon: "Cpu" },
+  { name: "ইসলামিক", slug: "islamic", icon: "Moon" },
+  { name: "মতামত", slug: "opinion", icon: "MessageSquare" },
 ];
 
 export const breakingNews: string[] = [];
