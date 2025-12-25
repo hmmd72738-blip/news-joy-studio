@@ -1,5 +1,5 @@
 import { NewsItem } from "@/data/newsData";
-import { Calendar, Clock, User } from "lucide-react";
+import { Clock, User, Calendar } from "lucide-react";
 
 interface LeadNewsProps {
   news: NewsItem;
@@ -8,46 +8,73 @@ interface LeadNewsProps {
 
 const LeadNews = ({ news, onReadMore }: LeadNewsProps) => {
   return (
-    <article 
-      className="relative overflow-hidden rounded-2xl cursor-pointer group news-card-hover"
+    <article
+      className="hero-card group cursor-pointer"
       onClick={() => onReadMore(news.id)}
     >
-      <div className="aspect-[16/9] md:aspect-[21/9]">
+      <div className="relative aspect-[16/9] md:aspect-[21/9] overflow-hidden">
+        {/* Image */}
         <img
           src={news.image}
           alt={news.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
-      </div>
-      <div className="absolute inset-0 bg-gradient-to-t from-primary/95 via-primary/50 to-transparent" />
-      <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
-        <div className="flex items-center gap-3 mb-4">
-          <span className="category-badge">{news.category}</span>
-          {news.isBreaking && (
-            <span className="px-3 py-1 bg-accent text-accent-foreground text-xs font-bold rounded-full animate-pulse-glow">
-              ব্রেকিং
+        
+        {/* Gradient Overlay */}
+        <div className="hero-overlay absolute inset-0" />
+        
+        {/* Content */}
+        <div className="absolute inset-0 flex flex-col justify-end p-6 md:p-10 lg:p-14">
+          {/* Category Badge */}
+          <div className="mb-4 animate-fade-in-up">
+            {news.isBreaking ? (
+              <span className="breaking-badge font-display">
+                ব্রেকিং নিউজ
+              </span>
+            ) : (
+              <span className="category-badge font-display">
+                {news.category}
+              </span>
+            )}
+          </div>
+          
+          {/* Title */}
+          <h2 className="font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white leading-tight mb-4 group-hover:text-gold transition-colors duration-300 line-clamp-3 text-balance animate-fade-in-up stagger-1">
+            {news.title}
+          </h2>
+          
+          {/* Excerpt */}
+          <p className="hidden md:block text-white/80 text-lg mb-6 line-clamp-2 max-w-3xl animate-fade-in-up stagger-2">
+            {news.excerpt}
+          </p>
+          
+          {/* Meta Info */}
+          <div className="flex flex-wrap items-center gap-4 text-white/70 text-sm animate-fade-in-up stagger-3">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-full bg-white/20 flex items-center justify-center">
+                <User className="w-4 h-4" />
+              </div>
+              <span className="font-medium">{news.author}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Calendar className="w-4 h-4" />
+              <span>{news.date}</span>
+            </div>
+            <div className="flex items-center gap-1.5">
+              <Clock className="w-4 h-4" />
+              <span>{news.readTime} পড়তে সময় লাগবে</span>
+            </div>
+          </div>
+          
+          {/* Read More Button */}
+          <div className="mt-6 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300">
+            <span className="btn-premium inline-flex items-center gap-2 text-sm">
+              পুরো খবর পড়ুন
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </span>
-          )}
-        </div>
-        <h2 className="text-2xl md:text-4xl font-bold text-primary-foreground mb-4 leading-tight">
-          {news.title}
-        </h2>
-        <p className="text-primary-foreground/80 text-lg mb-4 line-clamp-2 hidden md:block">
-          {news.excerpt}
-        </p>
-        <div className="flex flex-wrap items-center gap-4 text-sm text-primary-foreground/70">
-          <span className="flex items-center gap-1">
-            <User className="w-4 h-4" />
-            {news.author}
-          </span>
-          <span className="flex items-center gap-1">
-            <Calendar className="w-4 h-4" />
-            {news.date}
-          </span>
-          <span className="flex items-center gap-1">
-            <Clock className="w-4 h-4" />
-            {news.readTime} পড়া
-          </span>
+          </div>
         </div>
       </div>
     </article>

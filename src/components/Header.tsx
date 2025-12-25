@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Search, Menu, X, Moon, Sun, Settings } from "lucide-react";
+import { Search, Menu, X, Moon, Sun, Settings, User } from "lucide-react";
 import { categories } from "@/data/newsData";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -23,177 +23,192 @@ const Header = ({
 }: HeaderProps) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const { user, isAdmin } = useAuth();
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="sticky top-0 z-50 bg-news-header text-news-header-foreground shadow-lg">
-      {/* Top bar */}
-      <div className="container py-4">
-        <div className="flex items-center justify-between">
+    <header
+      className={`premium-header transition-all duration-500 ${
+        scrolled ? "py-2" : "py-4"
+      }`}
+    >
+      <div className="container">
+        {/* Main Header Row */}
+        <div className="flex items-center justify-between gap-4">
           {/* Logo */}
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-lg bg-accent flex items-center justify-center">
-              <span className="text-accent-foreground font-bold text-xl">দ</span>
+            <div className="relative group">
+              <div className="w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-to-br from-gold to-accent flex items-center justify-center transform transition-transform duration-300 group-hover:scale-105 group-hover:rotate-3">
+                <span className="text-primary-foreground font-display text-2xl md:text-3xl font-bold">
+                  দ
+                </span>
+              </div>
+              <div className="absolute -inset-1 bg-gradient-to-r from-gold to-accent rounded-xl blur opacity-30 group-hover:opacity-50 transition-opacity" />
             </div>
-            <div>
-              <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
+            <div className="hidden sm:block">
+              <h1 className="font-display text-xl md:text-2xl font-bold text-news-header-foreground leading-tight">
                 দৈনিক প্রতিদিন
               </h1>
-              <p className="text-xs text-news-header-foreground/70 hidden sm:block">
-                সত্য ও নিরপেক্ষ সংবাদের প্রতিশ্রুতি
+              <p className="text-[10px] md:text-xs text-news-header-foreground/60 tracking-wider uppercase">
+                সত্য • নিরপেক্ষ • আধুনিক
               </p>
             </div>
           </div>
 
-          {/* Desktop Actions */}
-          <div className="hidden md:flex items-center gap-4">
-            {/* Search */}
-            <div className="relative">
+          {/* Desktop Search */}
+          <div className="hidden lg:flex flex-1 max-w-md mx-8">
+            <div
+              className={`relative w-full transition-all duration-300 ${
+                searchOpen ? "scale-105" : ""
+              }`}
+            >
               <input
                 type="text"
                 placeholder="সংবাদ খুঁজুন..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-64 px-4 py-2 pl-10 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-news-header-foreground placeholder:text-news-header-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
+                onFocus={() => setSearchOpen(true)}
+                onBlur={() => setSearchOpen(false)}
+                className="w-full py-2.5 px-4 pl-11 rounded-xl bg-white/10 border border-white/10 text-news-header-foreground placeholder:text-news-header-foreground/50 focus:outline-none focus:border-gold/50 focus:bg-white/15 transition-all duration-300"
               />
-              <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-news-header-foreground/50" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-news-header-foreground/50" />
             </div>
+          </div>
 
-            {/* Dark Mode Toggle */}
-            <button
-              onClick={toggleDarkMode}
-              className="p-2 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors"
-              aria-label="Toggle dark mode"
-            >
-              {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
-
-            {/* Admin Link */}
+          {/* Desktop Actions */}
+          <div className="hidden md:flex items-center gap-2">
             {isAdmin && (
               <Link
                 to="/admin"
-                className="flex items-center gap-2 px-4 py-2 rounded-full bg-accent text-accent-foreground hover:bg-accent/90 transition-colors"
+                className="p-2.5 rounded-xl bg-white/10 text-news-header-foreground hover:bg-white/20 transition-all duration-300"
+                title="অ্যাডমিন প্যানেল"
               >
-                <Settings className="w-4 h-4" />
-                <span className="text-sm font-medium">অ্যাডমিন</span>
+                <Settings className="w-5 h-5" />
               </Link>
             )}
+
             {!user && (
               <Link
                 to="/auth"
-                className="px-4 py-2 rounded-full bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors text-sm font-medium"
+                className="p-2.5 rounded-xl bg-white/10 text-news-header-foreground hover:bg-white/20 transition-all duration-300"
+                title="লগইন"
               >
-                লগইন
+                <User className="w-5 h-5" />
               </Link>
             )}
+
+            <button
+              onClick={toggleDarkMode}
+              className="p-2.5 rounded-xl bg-white/10 text-news-header-foreground hover:bg-gold/20 hover:text-gold transition-all duration-300"
+              aria-label={darkMode ? "লাইট মোড" : "ডার্ক মোড"}
+            >
+              {darkMode ? (
+                <Sun className="w-5 h-5" />
+              ) : (
+                <Moon className="w-5 h-5" />
+              )}
+            </button>
           </div>
 
           {/* Mobile Actions */}
           <div className="flex md:hidden items-center gap-2">
             <button
               onClick={() => setSearchOpen(!searchOpen)}
-              className="p-2 rounded-full bg-primary-foreground/10"
+              className="p-2 rounded-lg bg-white/10 text-news-header-foreground"
             >
               <Search className="w-5 h-5" />
             </button>
             <button
               onClick={toggleDarkMode}
-              className="p-2 rounded-full bg-primary-foreground/10"
+              className="p-2 rounded-lg bg-white/10 text-news-header-foreground"
             >
-              {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+              {darkMode ? (
+                <Sun className="w-5 h-5" />
+              ) : (
+                <Moon className="w-5 h-5" />
+              )}
             </button>
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-full bg-primary-foreground/10"
+              className="p-2 rounded-lg bg-white/10 text-news-header-foreground"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? (
+                <X className="w-5 h-5" />
+              ) : (
+                <Menu className="w-5 h-5" />
+              )}
             </button>
           </div>
         </div>
 
         {/* Mobile Search */}
         {searchOpen && (
-          <div className="mt-4 md:hidden animate-fade-in-up">
+          <div className="md:hidden mt-4 animate-fade-in-down">
             <input
               type="text"
               placeholder="সংবাদ খুঁজুন..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full px-4 py-2 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-news-header-foreground placeholder:text-news-header-foreground/50 focus:outline-none focus:ring-2 focus:ring-accent"
+              className="w-full py-2.5 px-4 rounded-xl bg-white/10 border border-white/10 text-news-header-foreground placeholder:text-news-header-foreground/50 focus:outline-none focus:border-gold/50"
             />
           </div>
         )}
-      </div>
 
-      {/* Navigation */}
-      <nav className="border-t border-primary-foreground/10">
-        <div className="container">
-          {/* Desktop Nav */}
-          <ul className="hidden md:flex items-center gap-1 py-2 overflow-x-auto">
-            {categories.map((cat) => (
-              <li key={cat.slug}>
-                <button
-                  onClick={() => setActiveCategory(cat.slug)}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all whitespace-nowrap ${
-                    activeCategory === cat.slug
-                      ? "bg-accent text-accent-foreground"
-                      : "hover:bg-primary-foreground/10"
-                  }`}
-                >
-                  {cat.name}
-                </button>
-              </li>
+        {/* Navigation */}
+        <nav
+          className={`mt-4 ${
+            mobileMenuOpen ? "block" : "hidden md:block"
+          }`}
+        >
+          <div className="flex flex-wrap gap-1 md:gap-2">
+            {categories.map((category) => (
+              <button
+                key={category.slug}
+                onClick={() => {
+                  setActiveCategory(category.slug);
+                  setMobileMenuOpen(false);
+                }}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                  activeCategory === category.slug
+                    ? "bg-gradient-to-r from-gold to-accent text-primary-foreground shadow-lg"
+                    : "text-news-header-foreground/80 hover:bg-white/10 hover:text-news-header-foreground"
+                }`}
+              >
+                {category.name}
+              </button>
             ))}
-          </ul>
-
-          {/* Mobile Nav */}
-          {mobileMenuOpen && (
-            <div className="md:hidden py-4 space-y-1 animate-fade-in-up">
-              <ul className="space-y-1">
-                {categories.map((cat) => (
-                  <li key={cat.slug}>
-                    <button
-                      onClick={() => {
-                        setActiveCategory(cat.slug);
-                        setMobileMenuOpen(false);
-                      }}
-                      className={`w-full text-left px-4 py-3 rounded-lg font-medium transition-all ${
-                        activeCategory === cat.slug
-                          ? "bg-accent text-accent-foreground"
-                          : "hover:bg-primary-foreground/10"
-                      }`}
-                    >
-                      {cat.name}
-                    </button>
-                  </li>
-                ))}
-              </ul>
-              
-              {/* Mobile Auth Links */}
-              <div className="pt-4 mt-4 border-t border-primary-foreground/10 space-y-2">
-                {isAdmin && (
-                  <Link
-                    to="/admin"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="flex items-center gap-2 px-4 py-3 rounded-lg bg-accent text-accent-foreground font-medium"
-                  >
-                    <Settings className="w-4 h-4" />
-                    <span>অ্যাডমিন প্যানেল</span>
-                  </Link>
-                )}
-                {!user && (
-                  <Link
-                    to="/auth"
-                    onClick={() => setMobileMenuOpen(false)}
-                    className="block px-4 py-3 rounded-lg bg-primary-foreground/10 hover:bg-primary-foreground/20 transition-colors font-medium text-center"
-                  >
-                    লগইন করুন
-                  </Link>
-                )}
-              </div>
+            
+            {/* Mobile Admin/Auth Links */}
+            <div className="md:hidden w-full flex gap-2 mt-2 pt-2 border-t border-white/10">
+              {isAdmin ? (
+                <Link
+                  to="/admin"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex-1 py-2 text-center rounded-lg bg-white/10 text-news-header-foreground text-sm"
+                >
+                  অ্যাডমিন প্যানেল
+                </Link>
+              ) : !user ? (
+                <Link
+                  to="/auth"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="flex-1 py-2 text-center rounded-lg bg-white/10 text-news-header-foreground text-sm"
+                >
+                  লগইন করুন
+                </Link>
+              ) : null}
             </div>
-          )}
-        </div>
-      </nav>
+          </div>
+        </nav>
+      </div>
     </header>
   );
 };

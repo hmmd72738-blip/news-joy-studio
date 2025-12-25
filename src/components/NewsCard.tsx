@@ -1,5 +1,5 @@
 import { NewsItem } from "@/data/newsData";
-import { Calendar, ArrowRight } from "lucide-react";
+import { Clock, ThumbsUp, MessageCircle, Share2 } from "lucide-react";
 
 interface NewsCardProps {
   news: NewsItem;
@@ -8,36 +8,92 @@ interface NewsCardProps {
 
 const NewsCard = ({ news, onReadMore }: NewsCardProps) => {
   return (
-    <article 
-      className="bg-card rounded-xl overflow-hidden shadow-md news-card-hover cursor-pointer group"
+    <article
+      className="news-card group cursor-pointer h-full flex flex-col"
       onClick={() => onReadMore(news.id)}
     >
-      <div className="aspect-[16/10] overflow-hidden">
+      {/* Image Container */}
+      <div className="relative overflow-hidden aspect-[16/10]">
         <img
           src={news.image}
           alt={news.title}
           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
+        
+        {/* Category Badge */}
+        <div className="absolute top-3 left-3">
+          <span className="category-badge font-display text-[10px]">
+            {news.category}
+          </span>
+        </div>
+        
+        {/* Breaking Badge */}
+        {news.isBreaking && (
+          <div className="absolute top-3 right-3">
+            <span className="breaking-badge text-[10px]">
+              ব্রেকিং
+            </span>
+          </div>
+        )}
+        
+        {/* Overlay on hover */}
+        <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </div>
-      <div className="p-5">
-        <span className="category-badge text-xs mb-3 inline-block">
-          {news.category}
-        </span>
-        <h3 className="text-lg font-bold text-card-foreground mb-2 line-clamp-2 group-hover:text-accent transition-colors">
+      
+      {/* Content */}
+      <div className="flex-1 flex flex-col p-5">
+        {/* Title */}
+        <h3 className="font-display text-lg md:text-xl font-bold text-card-foreground leading-snug mb-3 line-clamp-2 group-hover:text-accent transition-colors duration-300">
           {news.title}
         </h3>
-        <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+        
+        {/* Excerpt */}
+        <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2 flex-1">
           {news.excerpt}
         </p>
-        <div className="flex items-center justify-between">
-          <span className="flex items-center gap-1 text-xs text-news-date">
-            <Calendar className="w-3 h-3" />
-            {news.date}
-          </span>
-          <span className="flex items-center gap-1 text-sm font-medium text-accent group-hover:gap-2 transition-all">
-            বিস্তারিত
-            <ArrowRight className="w-4 h-4" />
-          </span>
+        
+        {/* Footer */}
+        <div className="flex items-center justify-between pt-4 border-t border-border/50">
+          {/* Author & Date */}
+          <div className="flex items-center gap-3">
+            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center text-accent-foreground text-xs font-bold">
+              {news.author.charAt(0)}
+            </div>
+            <div>
+              <p className="text-xs font-medium text-card-foreground">{news.author}</p>
+              <p className="text-[10px] text-muted-foreground">{news.date}</p>
+            </div>
+          </div>
+          
+          {/* Read Time */}
+          <div className="flex items-center gap-1 text-muted-foreground">
+            <Clock className="w-3.5 h-3.5" />
+            <span className="text-xs">{news.readTime}</span>
+          </div>
+        </div>
+        
+        {/* Reaction Icons */}
+        <div className="flex items-center gap-4 mt-4 pt-3 border-t border-border/30">
+          <button 
+            className="flex items-center gap-1.5 text-muted-foreground hover:text-accent transition-colors"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <ThumbsUp className="w-4 h-4" />
+            <span className="text-xs">পছন্দ</span>
+          </button>
+          <button 
+            className="flex items-center gap-1.5 text-muted-foreground hover:text-accent transition-colors"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <MessageCircle className="w-4 h-4" />
+            <span className="text-xs">মন্তব্য</span>
+          </button>
+          <button 
+            className="flex items-center gap-1.5 text-muted-foreground hover:text-accent transition-colors ml-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <Share2 className="w-4 h-4" />
+          </button>
         </div>
       </div>
     </article>
