@@ -4,6 +4,7 @@ import {
   Search, Menu, X, Moon, Sun, Settings, User, TrendingUp, Clock,
   Home, Flag, Globe, Landmark, Trophy, Film, Cpu, MessageSquare
 } from "lucide-react";
+import logoBrand from "@/assets/logo-brand.png";
 import { categories } from "@/data/newsData";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -92,60 +93,14 @@ const Header = ({
 
       <div className="container">
         {/* Main Header Row */}
-        <div className="flex items-center justify-center py-5 md:py-7">
-          {/* Header Title - Ultra Bold Styled Text */}
-          <Link to="/" className="group relative">
-            <div className="relative">
-              {/* Main Title */}
-              <h1 
-                className="font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight text-transparent bg-clip-text bg-gradient-to-br from-blue-800 via-blue-600 to-blue-900 drop-shadow-[0_4px_20px_rgba(30,64,175,0.6)] transition-all duration-300 group-hover:drop-shadow-[0_6px_30px_rgba(30,64,175,0.8)]" 
-                style={{ 
-                  fontFamily: "'Noto Serif Bengali', 'Hind Siliguri', serif",
-                  textShadow: '2px 2px 0px rgba(30,64,175,0.3), -1px -1px 0px rgba(59,130,246,0.2)',
-                  WebkitTextStroke: '0.5px rgba(30,64,175,0.4)'
-                }}
-              >
-                দৈনিক প্রতিদিন
-              </h1>
-              {/* Aggressive Red Slash Underline */}
-              <div className="absolute -bottom-2 left-1/2 -translate-x-1/2 w-[95%] h-2.5 md:h-3.5">
-                <svg viewBox="0 0 200 16" className="w-full h-full" preserveAspectRatio="none">
-                  {/* Main aggressive slash */}
-                  <path 
-                    d="M-5 12 L60 4 L140 10 L210 2" 
-                    stroke="url(#aggressiveRed)" 
-                    strokeWidth="6" 
-                    fill="none" 
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    style={{ filter: 'drop-shadow(0 3px 6px rgba(185,28,28,0.5))' }}
-                  />
-                  {/* Speed lines */}
-                  <path 
-                    d="M180 6 L205 3" 
-                    stroke="#ef4444" 
-                    strokeWidth="2" 
-                    strokeLinecap="round"
-                    opacity="0.8"
-                  />
-                  <path 
-                    d="M185 10 L200 8" 
-                    stroke="#dc2626" 
-                    strokeWidth="1.5" 
-                    strokeLinecap="round"
-                    opacity="0.6"
-                  />
-                  <defs>
-                    <linearGradient id="aggressiveRed" x1="0%" y1="0%" x2="100%" y2="0%">
-                      <stop offset="0%" stopColor="#991b1b" />
-                      <stop offset="30%" stopColor="#dc2626" />
-                      <stop offset="60%" stopColor="#ef4444" />
-                      <stop offset="100%" stopColor="#b91c1c" />
-                    </linearGradient>
-                  </defs>
-                </svg>
-              </div>
-            </div>
+        <div className="flex items-center justify-between py-4 md:py-6">
+          {/* Header Logo Image */}
+          <Link to="/" className="group flex-1 flex justify-center md:justify-start">
+            <img 
+              src={logoBrand} 
+              alt="দৈনিক প্রতিদিন" 
+              className="h-16 sm:h-20 md:h-24 lg:h-28 object-contain transform transition-all duration-300 group-hover:scale-[1.02]"
+            />
           </Link>
 
           {/* Desktop Search */}
