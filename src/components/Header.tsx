@@ -4,7 +4,6 @@ import {
   Search, Menu, X, Moon, Sun, Settings, User, TrendingUp, Clock,
   Home, Flag, Globe, Landmark, Trophy, Film, Cpu, MessageSquare
 } from "lucide-react";
-import headerTitle from "@/assets/header-title.png";
 import { categories } from "@/data/newsData";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -93,14 +92,35 @@ const Header = ({
 
       <div className="container">
         {/* Main Header Row */}
-        <div className="flex items-center justify-center py-2">
-          {/* Header Title Image - Centered and Large */}
-          <Link to="/" className="group">
-            <img 
-              src={headerTitle} 
-              alt="দৈনিক প্রতিদিন" 
-              className="h-20 sm:h-28 md:h-36 lg:h-44 object-contain transform transition-all duration-300 group-hover:scale-[1.02]"
-            />
+        <div className="flex items-center justify-center py-4 md:py-6">
+          {/* Header Title - Styled Text */}
+          <Link to="/" className="group relative">
+            <div className="relative">
+              {/* Main Title */}
+              <h1 className="font-bold text-4xl sm:text-5xl md:text-6xl lg:text-7xl tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-blue-600 to-blue-800 drop-shadow-[0_0_15px_rgba(29,78,216,0.5)] transition-all duration-300 group-hover:drop-shadow-[0_0_25px_rgba(29,78,216,0.7)]" style={{ fontFamily: "'Noto Serif Bengali', 'Hind Siliguri', serif" }}>
+                দৈনিক প্রতিদিন
+              </h1>
+              {/* Red Swoosh Underline */}
+              <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-[90%] h-1.5 md:h-2">
+                <svg viewBox="0 0 200 12" className="w-full h-full" preserveAspectRatio="none">
+                  <path 
+                    d="M0 8 Q50 0, 100 6 T200 4" 
+                    stroke="url(#redGradient)" 
+                    strokeWidth="4" 
+                    fill="none" 
+                    strokeLinecap="round"
+                    className="drop-shadow-[0_2px_4px_rgba(220,38,38,0.4)]"
+                  />
+                  <defs>
+                    <linearGradient id="redGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+                      <stop offset="0%" stopColor="#dc2626" />
+                      <stop offset="50%" stopColor="#ef4444" />
+                      <stop offset="100%" stopColor="#b91c1c" />
+                    </linearGradient>
+                  </defs>
+                </svg>
+              </div>
+            </div>
           </Link>
 
           {/* Desktop Search */}
