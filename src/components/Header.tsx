@@ -93,13 +93,13 @@ const Header = ({
 
       <div className="container">
         {/* Main Header Row */}
-        <div className="flex items-center justify-between gap-4 py-1">
-          {/* Header Title Image */}
-          <Link to="/" className="group">
+        <div className="flex items-center justify-end gap-4 py-1">
+          {/* Header Title Image - Full Width Right Aligned */}
+          <Link to="/" className="group flex-1 flex justify-end">
             <img 
               src={headerTitle} 
               alt="দৈনিক প্রতিদিন" 
-              className="h-16 sm:h-20 md:h-24 object-contain transform transition-all duration-300 group-hover:scale-105"
+              className="h-16 sm:h-20 md:h-24 w-full object-contain object-right transform transition-all duration-300 group-hover:scale-[1.02]"
             />
           </Link>
 
