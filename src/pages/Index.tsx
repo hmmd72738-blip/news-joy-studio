@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import BreakingNewsTicker from "@/components/BreakingNewsTicker";
 import LeadNews from "@/components/LeadNews";
 import NewsCard from "@/components/NewsCard";
 import Sidebar from "@/components/Sidebar";
-import NewsDetail from "@/components/NewsDetail";
 import ScrollToTop from "@/components/ScrollToTop";
 import Footer from "@/components/Footer";
 import NewsCardSkeleton from "@/components/NewsCardSkeleton";
@@ -43,10 +43,10 @@ const convertToNewsItem = (dbNews: DBNewsItem): NewsItem => {
 };
 
 const Index = () => {
+  const navigate = useNavigate();
   const [darkMode, setDarkMode] = useState(false);
   const [activeCategory, setActiveCategory] = useState("home");
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedNews, setSelectedNews] = useState<NewsItem | null>(null);
   
   const { news: dbNews, loading } = useNews();
   
@@ -61,13 +61,6 @@ const Index = () => {
     }
   }, [darkMode]);
 
-  // If the selected article no longer exists, return to list view
-  useEffect(() => {
-    if (selectedNews && !newsData.some((n) => String(n.id) === String(selectedNews.id))) {
-      setSelectedNews(null);
-    }
-  }, [selectedNews, newsData]);
-
   const toggleDarkMode = () => setDarkMode(!darkMode);
 
   const filteredNews = newsData.filter((news) => {
@@ -81,15 +74,7 @@ const Index = () => {
   const otherNews = filteredNews.filter((news) => String(news.id) !== String(leadNews?.id));
 
   const handleReadMore = (id: number | string) => {
-    const news = newsData.find((n) => String(n.id) === String(id));
-    if (news) {
-      setSelectedNews(news);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
-
-  const handleBack = () => {
-    setSelectedNews(null);
+    navigate(`/news/${id}`);
   };
 
   return (
@@ -142,15 +127,6 @@ const Index = () => {
               </div>
             </div>
           </>
-        ) : selectedNews ? (
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            <div className="lg:col-span-2">
-              <NewsDetail news={selectedNews} onBack={handleBack} />
-            </div>
-            <div className="lg:col-span-1">
-              <Sidebar popularNews={newsData} onReadMore={handleReadMore} />
-            </div>
-          </div>
         ) : (
           <>
             {/* Lead News */}
