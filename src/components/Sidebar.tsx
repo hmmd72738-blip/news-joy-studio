@@ -3,7 +3,7 @@ import { TrendingUp, Clock, Eye, Calendar, Moon } from "lucide-react";
 
 interface SidebarProps {
   popularNews: NewsItem[];
-  onReadMore: (id: number | string) => void;
+  onReadMore?: (id: number | string) => void;
 }
 
 const Sidebar = ({ popularNews, onReadMore }: SidebarProps) => {
@@ -67,7 +67,7 @@ const Sidebar = ({ popularNews, onReadMore }: SidebarProps) => {
               <article
                 key={news.id}
                 className="group flex gap-3 cursor-pointer p-2 -mx-2 rounded-xl hover:bg-muted/50 transition-colors duration-300"
-                onClick={() => onReadMore(news.id)}
+                onClick={() => onReadMore?.(news.id)}
               >
                 {/* Number */}
                 <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center text-accent-foreground font-display font-bold text-base">
