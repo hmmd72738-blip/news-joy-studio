@@ -73,7 +73,7 @@ const Index = () => {
   });
 
   return (
-    <div className="min-h-screen bg-background pt-[130px] md:pt-[160px]">
+    <div className="min-h-screen bg-card pt-[130px] md:pt-[160px]">
       <Header
         darkMode={darkMode}
         toggleDarkMode={toggleDarkMode}
@@ -93,13 +93,6 @@ const Index = () => {
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             {/* News Articles */}
             <div className="lg:col-span-2">
-              <div className="section-divider mb-8">
-                <h2 className="font-display text-2xl font-bold text-foreground flex items-center gap-3">
-                  <Newspaper className="w-6 h-6 text-accent" />
-                  {activeCategory === "home" ? "সর্বশেষ সংবাদ" : 
-                    newsData.find(n => n.categorySlug === activeCategory)?.category || "সর্বশেষ সংবাদ"}
-                </h2>
-              </div>
 
               {sortedNews.length > 0 ? (
                 <div className="space-y-8">
