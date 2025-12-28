@@ -30,16 +30,6 @@ const NewsArticle = ({ news }: NewsArticleProps) => {
       </div>
 
       <div className="p-6 md:p-8">
-        {/* Category & Breaking Badge */}
-        <div className="flex flex-wrap items-center gap-3 mb-4">
-          <span className="category-badge">{news.category}</span>
-          {news.isBreaking && (
-            <span className="breaking-badge text-xs">
-              ব্রেকিং
-            </span>
-          )}
-        </div>
-
         {/* Title */}
         <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 leading-tight font-display">
           {news.title}
