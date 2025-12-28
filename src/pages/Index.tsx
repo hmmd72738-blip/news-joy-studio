@@ -82,7 +82,6 @@ const Index = () => {
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />
-      <BreakingNewsTicker />
 
       <main className="container py-6">
         {loading ? (
