@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Header from "@/components/Header";
-import BreakingNewsTicker from "@/components/BreakingNewsTicker";
+import CategoryBar from "@/components/CategoryBar";
 import NewsArticle from "@/components/NewsArticle";
 import Sidebar from "@/components/Sidebar";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -81,6 +81,10 @@ const Index = () => {
         setActiveCategory={setActiveCategory}
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
+      />
+      <CategoryBar 
+        activeCategory={activeCategory}
+        setActiveCategory={setActiveCategory}
       />
 
       <main className="container py-6">
