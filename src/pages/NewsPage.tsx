@@ -74,7 +74,7 @@ const NewsPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background pt-[100px] md:pt-[120px]">
+      <div className="min-h-screen bg-background">
         <Header
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}
@@ -99,7 +99,7 @@ const NewsPage = () => {
 
   if (!currentNews) {
     return (
-      <div className="min-h-screen bg-background pt-[100px] md:pt-[120px]">
+      <div className="min-h-screen bg-background">
         <Header
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}
@@ -129,7 +129,7 @@ const NewsPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background pt-[100px] md:pt-[120px]">
+    <div className="min-h-screen bg-background">
       <Header
         darkMode={darkMode}
         toggleDarkMode={toggleDarkMode}
@@ -143,10 +143,8 @@ const NewsPage = () => {
         setActiveCategory={setActiveCategory}
       />
 
-      <main className="py-6">
-        <div className="w-full px-4">
-          <NewsDetail news={currentNews} onBack={handleBack} />
-        </div>
+      <main className="py-6 px-4 md:px-8 lg:px-16">
+        <NewsDetail news={currentNews} onBack={handleBack} />
       </main>
 
       <Footer />

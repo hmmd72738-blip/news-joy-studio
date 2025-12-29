@@ -54,11 +54,11 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
       </button>
 
       {/* Hero Image */}
-      <div className="aspect-video rounded-2xl overflow-hidden mb-6">
+      <div className="w-full overflow-hidden mb-6">
         <img
           src={news.image}
           alt={news.title}
-          className="w-full h-full object-cover"
+          className="w-full h-auto object-cover"
         />
       </div>
 

@@ -20,7 +20,7 @@ const iconMap: { [key: string]: React.ReactNode } = {
 
 const CategoryBar = ({ activeCategory, setActiveCategory }: CategoryBarProps) => {
   return (
-    <div className="bg-card border-b border-border shadow-sm sticky top-[60px] md:top-[80px] z-40">
+    <div className="bg-card border-b border-border shadow-sm sticky top-0 z-40">
       <div className="container">
         <nav className="flex items-center gap-2 py-3 overflow-x-auto scrollbar-hide">
           {categories.map((category) => (
