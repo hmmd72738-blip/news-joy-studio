@@ -84,7 +84,7 @@ const Header = ({
               <div className="absolute -inset-1 bg-gradient-to-r from-gold/30 to-accent/30 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
             <div>
-              <h1 className="font-masthead text-xl sm:text-2xl md:text-3xl font-normal text-news-header-foreground leading-tight group-hover:text-gold transition-colors duration-300">
+              <h1 className="font-masthead text-2xl sm:text-3xl md:text-4xl font-normal text-news-header-foreground leading-tight group-hover:text-gold transition-colors duration-300">
                 কলমের কণ্ঠ
               </h1>
               <p className="hidden sm:block text-[10px] md:text-xs text-news-header-foreground/60 tracking-wider">
