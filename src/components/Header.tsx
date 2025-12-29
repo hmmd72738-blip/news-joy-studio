@@ -69,27 +69,6 @@ const Header = ({
         scrolled ? "py-2 shadow-2xl" : "py-3"
       }`}
     >
-      {/* Top Bar - Date & Time */}
-      <div className={`border-b border-white/10 transition-all duration-300 ${scrolled ? 'hidden' : 'block'}`}>
-        <div className="container">
-          <div className="flex items-center justify-between py-2 text-xs text-news-header-foreground/70">
-            <div className="flex items-center gap-4">
-              <span className="flex items-center gap-1.5">
-                <Clock className="w-3.5 h-3.5" />
-                {formatBanglaTime()}
-              </span>
-              <span className="hidden sm:inline">|</span>
-              <span className="hidden sm:inline">{formatBanglaDate()}</span>
-            </div>
-            <div className="flex items-center gap-3">
-              <span className="flex items-center gap-1.5 text-gold">
-                <TrendingUp className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">ট্রেন্ডিং</span>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
 
       <div className="container">
         {/* Main Header Row */}
@@ -99,14 +78,14 @@ const Header = ({
             <div className="relative">
               <img 
                 src={logo} 
-                alt="দৈনিক প্রতিদিন লোগো" 
+                alt="কলমের কণ্ঠ লোগো" 
                 className="w-12 h-12 md:w-16 md:h-16 rounded-lg object-contain transform transition-all duration-300 group-hover:scale-110 group-hover:rotate-3"
               />
               <div className="absolute -inset-1 bg-gradient-to-r from-gold/30 to-accent/30 rounded-xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
             <div>
               <h1 className="font-masthead text-xl sm:text-2xl md:text-3xl font-normal text-news-header-foreground leading-tight group-hover:text-gold transition-colors duration-300">
-                দৈনিক প্রতিদিন
+                কলমের কণ্ঠ
               </h1>
               <p className="hidden sm:block text-[10px] md:text-xs text-news-header-foreground/60 tracking-wider">
                 <span className="text-gold">সত্য</span> • <span className="text-accent">নিরপেক্ষ</span> • আধুনিক

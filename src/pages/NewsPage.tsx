@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Header from "@/components/Header";
-import BreakingNewsTicker from "@/components/BreakingNewsTicker";
+import CategoryBar from "@/components/CategoryBar";
 import NewsDetail from "@/components/NewsDetail";
 import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
@@ -74,7 +74,7 @@ const NewsPage = () => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-background pt-[130px] md:pt-[160px]">
+      <div className="min-h-screen bg-background pt-[100px] md:pt-[120px]">
         <Header
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}
@@ -83,7 +83,10 @@ const NewsPage = () => {
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
         />
-        <BreakingNewsTicker />
+        <CategoryBar 
+          activeCategory={activeCategory}
+          setActiveCategory={setActiveCategory}
+        />
         <main className="container py-6">
           <div className="flex items-center justify-center py-20">
             <Loader2 className="w-10 h-10 animate-spin text-primary" />
@@ -96,7 +99,7 @@ const NewsPage = () => {
 
   if (!currentNews) {
     return (
-      <div className="min-h-screen bg-background pt-[130px] md:pt-[160px]">
+      <div className="min-h-screen bg-background pt-[100px] md:pt-[120px]">
         <Header
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}
@@ -105,7 +108,10 @@ const NewsPage = () => {
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
         />
-        <BreakingNewsTicker />
+        <CategoryBar 
+          activeCategory={activeCategory}
+          setActiveCategory={setActiveCategory}
+        />
         <main className="container py-6">
           <div className="text-center py-20">
             <h1 className="text-2xl font-bold text-foreground mb-4">সংবাদটি পাওয়া যায়নি</h1>
@@ -123,7 +129,7 @@ const NewsPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background pt-[130px] md:pt-[160px]">
+    <div className="min-h-screen bg-background pt-[100px] md:pt-[120px]">
       <Header
         darkMode={darkMode}
         toggleDarkMode={toggleDarkMode}
@@ -132,16 +138,14 @@ const NewsPage = () => {
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
       />
-      <BreakingNewsTicker />
+      <CategoryBar 
+        activeCategory={activeCategory}
+        setActiveCategory={setActiveCategory}
+      />
 
-      <main className="container py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
-            <NewsDetail news={currentNews} onBack={handleBack} />
-          </div>
-          <div className="lg:col-span-1">
-            <Sidebar popularNews={newsData} onReadMore={handleReadMore} />
-          </div>
+      <main className="py-6">
+        <div className="w-full px-4">
+          <NewsDetail news={currentNews} onBack={handleBack} />
         </div>
       </main>
 

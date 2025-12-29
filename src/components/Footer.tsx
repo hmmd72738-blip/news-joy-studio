@@ -22,12 +22,12 @@ const Footer = () => {
             <div className="flex items-center gap-3 mb-6">
               <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-gold to-accent flex items-center justify-center shadow-lg">
                 <span className="text-primary-foreground font-display text-3xl font-bold">
-                  দ
+                  ক
                 </span>
               </div>
               <div>
                 <h3 className="text-xl font-display font-bold text-news-header-foreground">
-                  দৈনিক প্রতিদিন
+                  কলমের কণ্ঠ
                 </h3>
                 <p className="text-[10px] text-news-header-foreground/50 uppercase tracking-widest">
                   Since 2024
@@ -125,8 +125,8 @@ const Footer = () => {
                 <div className="p-2 rounded-lg bg-white/5">
                   <Phone className="w-4 h-4 text-gold" />
                 </div>
-                <a href="tel:01302108957" className="hover:text-gold transition-colors text-sm">
-                  ০১৩০২১০৮৯৫৭
+                <a href="tel:09696708957" className="hover:text-gold transition-colors text-sm">
+                  ০৯৬৯৬৭০৮৯৫৭
                 </a>
               </li>
               <li className="flex items-center gap-3 text-news-header-foreground/70">
@@ -160,7 +160,7 @@ const Footer = () => {
         <div className="border-t border-white/10 mt-12 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
             <p className="text-sm text-news-header-foreground/50">
-              © ২০২৪ দৈনিক প্রতিদিন। সর্বস্বত্ব সংরক্ষিত।
+              © ২০২৪ কলমের কণ্ঠ। সর্বস্বত্ব সংরক্ষিত।
             </p>
             <div className="flex items-center gap-6">
               <Link to="/" className="text-xs text-news-header-foreground/50 hover:text-gold transition-colors">
