@@ -47,7 +47,7 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
       {/* Back Button */}
       <button
         onClick={onBack}
-        className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors"
+        className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors px-4"
       >
         <ArrowLeft className="w-5 h-5" />
         <span>ফিরে যান</span>
@@ -61,6 +61,8 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
           className="w-full h-auto object-cover"
         />
       </div>
+
+      <div className="px-4 md:px-8 lg:px-16">
 
       {/* Category & Meta */}
       <div className="flex flex-wrap items-center gap-3 mb-4">
@@ -136,6 +138,7 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
             {paragraph}
           </p>
         ))}
+      </div>
       </div>
     </article>
   );
