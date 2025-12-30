@@ -43,7 +43,7 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
   };
 
   return (
-    <article className="animate-fade-in-up">
+    <article className="animate-fade-in-up w-full">
       {/* Back Button */}
       <button
         onClick={onBack}
@@ -62,8 +62,8 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
         />
       </div>
 
-      {/* Content Area */}
-      <div className="px-4 md:px-8 lg:px-16 w-full">
+      {/* Content Area - Full Width */}
+      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] px-4 md:px-8 lg:px-16">
         {/* Category & Meta */}
         <div className="flex flex-wrap items-center gap-3 mb-4">
           <span className="category-badge">{news.category}</span>
