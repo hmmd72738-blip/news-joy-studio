@@ -47,14 +47,14 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
       {/* Back Button */}
       <button
         onClick={onBack}
-        className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors px-4"
+        className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-4 transition-colors px-4 md:px-6"
       >
         <ArrowLeft className="w-5 h-5" />
         <span>ফিরে যান</span>
       </button>
 
-      {/* Hero Image */}
-      <div className="w-full overflow-hidden mb-6">
+      {/* Hero Image - Full Width */}
+      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] mb-6">
         <img
           src={news.image}
           alt={news.title}
@@ -62,83 +62,83 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
         />
       </div>
 
-      <div className="px-4 md:px-8 lg:px-16">
+      {/* Content Area */}
+      <div className="px-4 md:px-6 lg:px-8 max-w-4xl mx-auto">
+        {/* Category & Meta */}
+        <div className="flex flex-wrap items-center gap-3 mb-4">
+          <span className="category-badge">{news.category}</span>
+          {news.isBreaking && (
+            <span className="px-3 py-1 bg-accent text-accent-foreground text-xs font-bold rounded-full">
+              ব্রেকিং
+            </span>
+          )}
+        </div>
 
-      {/* Category & Meta */}
-      <div className="flex flex-wrap items-center gap-3 mb-4">
-        <span className="category-badge">{news.category}</span>
-        {news.isBreaking && (
-          <span className="px-3 py-1 bg-accent text-accent-foreground text-xs font-bold rounded-full">
-            ব্রেকিং
+        {/* Title */}
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-6 leading-tight">
+          {news.title}
+        </h1>
+
+        {/* Author & Date */}
+        <div className="flex flex-wrap items-center gap-4 md:gap-6 mb-6 pb-6 border-b border-border">
+          <span className="flex items-center gap-2 text-muted-foreground text-sm md:text-base">
+            <User className="w-4 h-4 md:w-5 md:h-5" />
+            {news.author}
           </span>
-        )}
-      </div>
+          <span className="flex items-center gap-2 text-muted-foreground text-sm md:text-base">
+            <Calendar className="w-4 h-4 md:w-5 md:h-5" />
+            {news.date}
+          </span>
+          <span className="flex items-center gap-2 text-muted-foreground text-sm md:text-base">
+            <Clock className="w-4 h-4 md:w-5 md:h-5" />
+            {news.readTime} পড়া
+          </span>
+        </div>
 
-      {/* Title */}
-      <h1 className="text-3xl md:text-4xl font-bold text-foreground mb-6 leading-tight">
-        {news.title}
-      </h1>
+        {/* Social Share */}
+        <div className="flex items-center gap-3 md:gap-4 mb-8">
+          <span className="text-sm text-muted-foreground">শেয়ার করুন:</span>
+          <button
+            onClick={shareOnFacebook}
+            className="p-2 rounded-full bg-[#1877F2] text-primary-foreground hover:opacity-90 transition-opacity"
+            aria-label="Share on Facebook"
+          >
+            <Facebook className="w-4 h-4 md:w-5 md:h-5" />
+          </button>
+          <button
+            onClick={shareOnTwitter}
+            className="p-2 rounded-full bg-[#1DA1F2] text-primary-foreground hover:opacity-90 transition-opacity"
+            aria-label="Share on Twitter"
+          >
+            <Twitter className="w-4 h-4 md:w-5 md:h-5" />
+          </button>
+          <button
+            onClick={shareOnWhatsApp}
+            className="p-2 rounded-full bg-[#25D366] text-primary-foreground hover:opacity-90 transition-opacity"
+            aria-label="Share on WhatsApp"
+          >
+            <Share2 className="w-4 h-4 md:w-5 md:h-5" />
+          </button>
+          <button
+            onClick={copyLink}
+            className="p-2 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 transition-colors"
+            aria-label="Copy Link"
+          >
+            {copied ? <Check className="w-4 h-4 md:w-5 md:h-5 text-green-500" /> : <Link2 className="w-4 h-4 md:w-5 md:h-5" />}
+          </button>
+        </div>
 
-      {/* Author & Date */}
-      <div className="flex flex-wrap items-center gap-6 mb-6 pb-6 border-b border-border">
-        <span className="flex items-center gap-2 text-muted-foreground">
-          <User className="w-5 h-5" />
-          {news.author}
-        </span>
-        <span className="flex items-center gap-2 text-muted-foreground">
-          <Calendar className="w-5 h-5" />
-          {news.date}
-        </span>
-        <span className="flex items-center gap-2 text-muted-foreground">
-          <Clock className="w-5 h-5" />
-          {news.readTime} পড়া
-        </span>
-      </div>
-
-      {/* Social Share */}
-      <div className="flex items-center gap-4 mb-8">
-        <span className="text-sm text-muted-foreground">শেয়ার করুন:</span>
-        <button
-          onClick={shareOnFacebook}
-          className="p-2 rounded-full bg-[#1877F2] text-primary-foreground hover:opacity-90 transition-opacity"
-          aria-label="Share on Facebook"
-        >
-          <Facebook className="w-5 h-5" />
-        </button>
-        <button
-          onClick={shareOnTwitter}
-          className="p-2 rounded-full bg-[#1DA1F2] text-primary-foreground hover:opacity-90 transition-opacity"
-          aria-label="Share on Twitter"
-        >
-          <Twitter className="w-5 h-5" />
-        </button>
-        <button
-          onClick={shareOnWhatsApp}
-          className="p-2 rounded-full bg-[#25D366] text-primary-foreground hover:opacity-90 transition-opacity"
-          aria-label="Share on WhatsApp"
-        >
-          <Share2 className="w-5 h-5" />
-        </button>
-        <button
-          onClick={copyLink}
-          className="p-2 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 transition-colors"
-          aria-label="Copy Link"
-        >
-          {copied ? <Check className="w-5 h-5 text-green-500" /> : <Link2 className="w-5 h-5" />}
-        </button>
-      </div>
-
-      {/* Content */}
-      <div className="prose prose-lg max-w-none">
-        <p className="text-xl text-muted-foreground mb-6 leading-relaxed">
-          {news.excerpt}
-        </p>
-        {news.content.split('\n\n').map((paragraph, index) => (
-          <p key={index} className="text-foreground leading-relaxed mb-4">
-            {paragraph}
+        {/* Content */}
+        <div className="prose prose-lg max-w-none">
+          <p className="text-lg md:text-xl text-muted-foreground mb-6 leading-relaxed">
+            {news.excerpt}
           </p>
-        ))}
-      </div>
+          {news.content.split('\n\n').map((paragraph, index) => (
+            <p key={index} className="text-foreground leading-relaxed mb-4">
+              {paragraph}
+            </p>
+          ))}
+        </div>
       </div>
     </article>
   );
