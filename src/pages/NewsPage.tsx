@@ -143,7 +143,7 @@ const NewsPage = () => {
         setActiveCategory={setActiveCategory}
       />
 
-      <main className="py-6">
+      <main>
         <NewsDetail news={currentNews} onBack={handleBack} />
       </main>
 
