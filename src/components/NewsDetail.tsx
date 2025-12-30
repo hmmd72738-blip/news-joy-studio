@@ -63,7 +63,7 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
       </div>
 
       {/* Content Area */}
-      <div className="px-4 md:px-6 lg:px-8 max-w-4xl mx-auto">
+      <div className="px-4 md:px-8 lg:px-16 w-full">
         {/* Category & Meta */}
         <div className="flex flex-wrap items-center gap-3 mb-4">
           <span className="category-badge">{news.category}</span>
@@ -75,66 +75,66 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
         </div>
 
         {/* Title */}
-        <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-6 leading-tight">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
           {news.title}
         </h1>
 
         {/* Author & Date */}
         <div className="flex flex-wrap items-center gap-4 md:gap-6 mb-6 pb-6 border-b border-border">
-          <span className="flex items-center gap-2 text-muted-foreground text-sm md:text-base">
-            <User className="w-4 h-4 md:w-5 md:h-5" />
+          <span className="flex items-center gap-2 text-muted-foreground text-base md:text-lg">
+            <User className="w-5 h-5 md:w-5 md:h-5" />
             {news.author}
           </span>
-          <span className="flex items-center gap-2 text-muted-foreground text-sm md:text-base">
-            <Calendar className="w-4 h-4 md:w-5 md:h-5" />
+          <span className="flex items-center gap-2 text-muted-foreground text-base md:text-lg">
+            <Calendar className="w-5 h-5 md:w-5 md:h-5" />
             {news.date}
           </span>
-          <span className="flex items-center gap-2 text-muted-foreground text-sm md:text-base">
-            <Clock className="w-4 h-4 md:w-5 md:h-5" />
+          <span className="flex items-center gap-2 text-muted-foreground text-base md:text-lg">
+            <Clock className="w-5 h-5 md:w-5 md:h-5" />
             {news.readTime} পড়া
           </span>
         </div>
 
         {/* Social Share */}
-        <div className="flex items-center gap-3 md:gap-4 mb-8">
-          <span className="text-sm text-muted-foreground">শেয়ার করুন:</span>
+        <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-10">
+          <span className="text-base text-muted-foreground">শেয়ার করুন:</span>
           <button
             onClick={shareOnFacebook}
-            className="p-2 rounded-full bg-[#1877F2] text-primary-foreground hover:opacity-90 transition-opacity"
+            className="p-2.5 rounded-full bg-[#1877F2] text-primary-foreground hover:opacity-90 transition-opacity"
             aria-label="Share on Facebook"
           >
-            <Facebook className="w-4 h-4 md:w-5 md:h-5" />
+            <Facebook className="w-5 h-5" />
           </button>
           <button
             onClick={shareOnTwitter}
-            className="p-2 rounded-full bg-[#1DA1F2] text-primary-foreground hover:opacity-90 transition-opacity"
+            className="p-2.5 rounded-full bg-[#1DA1F2] text-primary-foreground hover:opacity-90 transition-opacity"
             aria-label="Share on Twitter"
           >
-            <Twitter className="w-4 h-4 md:w-5 md:h-5" />
+            <Twitter className="w-5 h-5" />
           </button>
           <button
             onClick={shareOnWhatsApp}
-            className="p-2 rounded-full bg-[#25D366] text-primary-foreground hover:opacity-90 transition-opacity"
+            className="p-2.5 rounded-full bg-[#25D366] text-primary-foreground hover:opacity-90 transition-opacity"
             aria-label="Share on WhatsApp"
           >
-            <Share2 className="w-4 h-4 md:w-5 md:h-5" />
+            <Share2 className="w-5 h-5" />
           </button>
           <button
             onClick={copyLink}
-            className="p-2 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 transition-colors"
+            className="p-2.5 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 transition-colors"
             aria-label="Copy Link"
           >
-            {copied ? <Check className="w-4 h-4 md:w-5 md:h-5 text-green-500" /> : <Link2 className="w-4 h-4 md:w-5 md:h-5" />}
+            {copied ? <Check className="w-5 h-5 text-green-500" /> : <Link2 className="w-5 h-5" />}
           </button>
         </div>
 
         {/* Content */}
-        <div className="prose prose-lg max-w-none">
-          <p className="text-lg md:text-xl text-muted-foreground mb-6 leading-relaxed">
+        <div className="prose prose-lg md:prose-xl max-w-none">
+          <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
             {news.excerpt}
           </p>
           {news.content.split('\n\n').map((paragraph, index) => (
-            <p key={index} className="text-foreground leading-relaxed mb-4">
+            <p key={index} className="text-foreground leading-relaxed mb-5 text-lg md:text-xl">
               {paragraph}
             </p>
           ))}
