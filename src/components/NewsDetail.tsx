@@ -43,18 +43,18 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
   };
 
   return (
-    <article className="animate-fade-in-up w-full">
+    <article className="animate-fade-in-up w-full overflow-x-hidden">
       {/* Back Button */}
       <button
         onClick={onBack}
-        className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-4 transition-colors px-4 md:px-6"
+        className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors px-4 md:px-6"
       >
         <ArrowLeft className="w-5 h-5" />
         <span>ফিরে যান</span>
       </button>
 
       {/* Hero Image - Full Width */}
-      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] mb-6">
+      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] mb-8">
         <img
           src={news.image}
           alt={news.title}
@@ -63,9 +63,9 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
       </div>
 
       {/* Content Area - Full Width */}
-      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] px-4 md:px-8 lg:px-16">
+      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] px-4 md:px-10 lg:px-20">
         {/* Category & Meta */}
-        <div className="flex flex-wrap items-center gap-3 mb-4">
+        <div className="flex flex-wrap items-center gap-3 mb-5">
           <span className="category-badge">{news.category}</span>
           {news.isBreaking && (
             <span className="px-3 py-1 bg-accent text-accent-foreground text-xs font-bold rounded-full">
@@ -75,29 +75,29 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
         </div>
 
         {/* Title */}
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6 leading-tight">
+        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-8 leading-tight">
           {news.title}
         </h1>
 
         {/* Author & Date */}
-        <div className="flex flex-wrap items-center gap-4 md:gap-6 mb-6 pb-6 border-b border-border">
-          <span className="flex items-center gap-2 text-muted-foreground text-base md:text-lg">
+        <div className="flex flex-wrap items-center gap-4 md:gap-6 mb-7 pb-7 border-b border-border">
+          <span className="flex items-center gap-2 text-muted-foreground text-lg md:text-xl">
             <User className="w-5 h-5 md:w-5 md:h-5" />
             {news.author}
           </span>
-          <span className="flex items-center gap-2 text-muted-foreground text-base md:text-lg">
+          <span className="flex items-center gap-2 text-muted-foreground text-lg md:text-xl">
             <Calendar className="w-5 h-5 md:w-5 md:h-5" />
             {news.date}
           </span>
-          <span className="flex items-center gap-2 text-muted-foreground text-base md:text-lg">
+          <span className="flex items-center gap-2 text-muted-foreground text-lg md:text-xl">
             <Clock className="w-5 h-5 md:w-5 md:h-5" />
             {news.readTime} পড়া
           </span>
         </div>
 
         {/* Social Share */}
-        <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-10">
-          <span className="text-base text-muted-foreground">শেয়ার করুন:</span>
+        <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-12">
+          <span className="text-lg text-muted-foreground">শেয়ার করুন:</span>
           <button
             onClick={shareOnFacebook}
             className="p-2.5 rounded-full bg-[#1877F2] text-primary-foreground hover:opacity-90 transition-opacity"
@@ -129,12 +129,12 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
         </div>
 
         {/* Content */}
-        <div className="prose prose-lg md:prose-xl max-w-none">
-          <p className="text-xl md:text-2xl text-muted-foreground mb-8 leading-relaxed">
+        <div className="prose max-w-none">
+          <p className="text-2xl md:text-3xl text-muted-foreground mb-10 leading-relaxed">
             {news.excerpt}
           </p>
           {news.content.split('\n\n').map((paragraph, index) => (
-            <p key={index} className="text-foreground leading-relaxed mb-5 text-lg md:text-xl">
+            <p key={index} className="text-foreground leading-relaxed mb-6 text-xl md:text-2xl">
               {paragraph}
             </p>
           ))}
