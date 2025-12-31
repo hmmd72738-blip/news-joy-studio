@@ -21,20 +21,20 @@ const iconMap: { [key: string]: React.ReactNode } = {
 const CategoryBar = ({ activeCategory, setActiveCategory }: CategoryBarProps) => {
   return (
     <div className="bg-card border-b border-border shadow-sm sticky top-0 z-40">
-      <div className="container">
-        <nav className="flex items-center gap-2 py-3 overflow-x-auto scrollbar-hide">
+      <div className="w-full px-4">
+        <nav className="grid grid-cols-4 gap-2 py-3 overflow-x-auto scrollbar-hide">
           {categories.map((category) => (
             <button
               key={category.slug}
               onClick={() => setActiveCategory(category.slug)}
-              className={`flex items-center gap-2 whitespace-nowrap px-5 py-2.5 text-base font-bold transition-all duration-200 rounded-lg ${
+              className={`flex items-center justify-center gap-1.5 whitespace-nowrap px-2 py-2.5 text-sm font-bold transition-all duration-200 rounded-lg ${
                 activeCategory === category.slug
                   ? "bg-destructive text-white"
                   : "text-foreground hover:text-destructive hover:bg-muted"
               }`}
             >
               {iconMap[category.icon]}
-              {category.name}
+              <span className="truncate">{category.name}</span>
             </button>
           ))}
         </nav>
