@@ -1,5 +1,5 @@
 import { NewsItem } from "@/data/newsData";
-import { ArrowLeft, Calendar, Clock, User, Facebook, Twitter, Share2, Link2, Check } from "lucide-react";
+import { ArrowLeft, Calendar, Clock, User, Facebook, Twitter, Share2, Link2, Check, Printer } from "lucide-react";
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
 
@@ -40,6 +40,10 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
         variant: "destructive",
       });
     }
+  };
+
+  const handlePrint = () => {
+    window.print();
   };
 
   return (
@@ -95,8 +99,8 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
           </span>
         </div>
 
-        {/* Social Share */}
-        <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-12">
+        {/* Social Share & Print */}
+        <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-12 print:hidden">
           <span className="text-lg text-muted-foreground">শেয়ার করুন:</span>
           <button
             onClick={shareOnFacebook}
@@ -125,6 +129,13 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
             aria-label="Copy Link"
           >
             {copied ? <Check className="w-5 h-5 text-green-500" /> : <Link2 className="w-5 h-5" />}
+          </button>
+          <button
+            onClick={handlePrint}
+            className="p-2.5 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 transition-colors"
+            aria-label="Print"
+          >
+            <Printer className="w-5 h-5" />
           </button>
         </div>
 
