@@ -141,11 +141,11 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
 
         {/* Content */}
         <div className="prose max-w-none">
-          <p className="text-3xl md:text-4xl text-muted-foreground mb-12 leading-relaxed">
+          <p className="text-4xl md:text-5xl text-muted-foreground mb-14 leading-relaxed">
             {news.excerpt}
           </p>
           {news.content.split('\n\n').map((paragraph, index) => (
-            <p key={index} className="text-foreground leading-relaxed mb-8 text-2xl md:text-3xl">
+            <p key={index} className="text-foreground leading-relaxed mb-10 text-3xl md:text-4xl">
               {paragraph}
             </p>
           ))}
