@@ -27,14 +27,14 @@ const CategoryBar = ({ activeCategory, setActiveCategory }: CategoryBarProps) =>
             <button
               key={category.slug}
               onClick={() => setActiveCategory(category.slug)}
-              className={`flex-shrink-0 w-[calc(25%-6px)] min-w-[80px] flex items-center justify-center gap-1.5 px-2 py-2.5 text-sm font-bold transition-all duration-200 rounded-lg ${
+              className={`flex-shrink-0 flex items-center justify-center gap-1.5 px-3 py-2.5 text-sm font-bold transition-all duration-200 rounded-lg whitespace-nowrap ${
                 activeCategory === category.slug
                   ? "bg-destructive text-white"
                   : "text-foreground hover:text-destructive hover:bg-muted"
               }`}
             >
               {iconMap[category.icon]}
-              <span className="truncate">{category.name}</span>
+              <span>{category.name}</span>
             </button>
           ))}
         </nav>
