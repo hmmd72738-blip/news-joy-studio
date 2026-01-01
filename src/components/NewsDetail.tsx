@@ -51,7 +51,7 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
       {/* Back Button */}
       <button
         onClick={onBack}
-        className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors px-4 md:px-6"
+        className="flex items-center gap-2 text-muted-foreground hover:text-foreground mb-6 transition-colors px-2 md:px-6"
       >
         <ArrowLeft className="w-5 h-5" />
         <span>ফিরে যান</span>
@@ -67,7 +67,7 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
       </div>
 
       {/* Content Area - Full Width */}
-      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] px-6 md:px-16 lg:px-32 xl:px-48">
+      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] px-3 md:px-16 lg:px-32 xl:px-48">
         {/* Category & Meta */}
         <div className="flex flex-wrap items-center gap-4 mb-6">
           <span className="category-badge text-lg px-4 py-2">{news.category}</span>
