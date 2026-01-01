@@ -27,7 +27,7 @@ const CategoryBar = ({ activeCategory, setActiveCategory }: CategoryBarProps) =>
             <button
               key={category.slug}
               onClick={() => setActiveCategory(category.slug)}
-              className={`flex-shrink-0 flex items-center justify-center gap-1.5 px-3 py-2.5 text-sm font-bold transition-all duration-200 rounded-lg whitespace-nowrap ${
+              className={`flex-shrink-0 flex items-center justify-center gap-1.5 px-3 py-2.5 text-sm font-bold transition-all duration-200 rounded-lg whitespace-nowrap relative ${
                 activeCategory === category.slug
                   ? "bg-destructive text-white"
                   : "text-foreground hover:text-destructive hover:bg-muted"
@@ -35,6 +35,12 @@ const CategoryBar = ({ activeCategory, setActiveCategory }: CategoryBarProps) =>
             >
               {iconMap[category.icon]}
               <span>{category.name}</span>
+              {/* Underline animation */}
+              <span 
+                className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-white rounded-full transition-all duration-300 ease-out ${
+                  activeCategory === category.slug ? "w-3/4 opacity-100" : "w-0 opacity-0"
+                }`}
+              />
             </button>
           ))}
         </nav>
