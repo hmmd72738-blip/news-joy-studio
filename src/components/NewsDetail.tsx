@@ -58,94 +58,94 @@ const NewsDetail = ({ news, onBack }: NewsDetailProps) => {
       </button>
 
       {/* Hero Image - Full Width */}
-      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] mb-8">
+      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] mb-10">
         <img
           src={news.image}
           alt={news.title}
-          className="w-full h-auto object-cover"
+          className="w-full h-[50vh] md:h-[60vh] lg:h-[70vh] object-cover"
         />
       </div>
 
       {/* Content Area - Full Width */}
-      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] px-4 md:px-10 lg:px-20">
+      <div className="w-screen relative left-1/2 right-1/2 -mx-[50vw] px-6 md:px-16 lg:px-32 xl:px-48">
         {/* Category & Meta */}
-        <div className="flex flex-wrap items-center gap-3 mb-5">
-          <span className="category-badge">{news.category}</span>
+        <div className="flex flex-wrap items-center gap-4 mb-6">
+          <span className="category-badge text-lg px-4 py-2">{news.category}</span>
           {news.isBreaking && (
-            <span className="px-3 py-1 bg-accent text-accent-foreground text-xs font-bold rounded-full">
+            <span className="px-4 py-2 bg-accent text-accent-foreground text-sm font-bold rounded-full">
               ব্রেকিং
             </span>
           )}
         </div>
 
         {/* Title */}
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-8 leading-tight">
+        <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-foreground mb-10 leading-tight">
           {news.title}
         </h1>
 
         {/* Author & Date */}
-        <div className="flex flex-wrap items-center gap-4 md:gap-6 mb-7 pb-7 border-b border-border">
-          <span className="flex items-center gap-2 text-muted-foreground text-lg md:text-xl">
-            <User className="w-5 h-5 md:w-5 md:h-5" />
+        <div className="flex flex-wrap items-center gap-5 md:gap-8 mb-10 pb-10 border-b border-border">
+          <span className="flex items-center gap-3 text-muted-foreground text-xl md:text-2xl">
+            <User className="w-6 h-6 md:w-7 md:h-7" />
             {news.author}
           </span>
-          <span className="flex items-center gap-2 text-muted-foreground text-lg md:text-xl">
-            <Calendar className="w-5 h-5 md:w-5 md:h-5" />
+          <span className="flex items-center gap-3 text-muted-foreground text-xl md:text-2xl">
+            <Calendar className="w-6 h-6 md:w-7 md:h-7" />
             {news.date}
           </span>
-          <span className="flex items-center gap-2 text-muted-foreground text-lg md:text-xl">
-            <Clock className="w-5 h-5 md:w-5 md:h-5" />
+          <span className="flex items-center gap-3 text-muted-foreground text-xl md:text-2xl">
+            <Clock className="w-6 h-6 md:w-7 md:h-7" />
             {news.readTime} পড়া
           </span>
         </div>
 
         {/* Social Share & Print */}
-        <div className="flex flex-wrap items-center gap-3 md:gap-4 mb-12 print:hidden">
-          <span className="text-lg text-muted-foreground">শেয়ার করুন:</span>
+        <div className="flex flex-wrap items-center gap-4 md:gap-5 mb-14 print:hidden">
+          <span className="text-xl text-muted-foreground">শেয়ার করুন:</span>
           <button
             onClick={shareOnFacebook}
-            className="p-2.5 rounded-full bg-[#1877F2] text-primary-foreground hover:opacity-90 transition-opacity"
+            className="p-3 rounded-full bg-[#1877F2] text-primary-foreground hover:opacity-90 transition-opacity"
             aria-label="Share on Facebook"
           >
-            <Facebook className="w-5 h-5" />
+            <Facebook className="w-6 h-6" />
           </button>
           <button
             onClick={shareOnTwitter}
-            className="p-2.5 rounded-full bg-[#1DA1F2] text-primary-foreground hover:opacity-90 transition-opacity"
+            className="p-3 rounded-full bg-[#1DA1F2] text-primary-foreground hover:opacity-90 transition-opacity"
             aria-label="Share on Twitter"
           >
-            <Twitter className="w-5 h-5" />
+            <Twitter className="w-6 h-6" />
           </button>
           <button
             onClick={shareOnWhatsApp}
-            className="p-2.5 rounded-full bg-[#25D366] text-primary-foreground hover:opacity-90 transition-opacity"
+            className="p-3 rounded-full bg-[#25D366] text-primary-foreground hover:opacity-90 transition-opacity"
             aria-label="Share on WhatsApp"
           >
-            <Share2 className="w-5 h-5" />
+            <Share2 className="w-6 h-6" />
           </button>
           <button
             onClick={copyLink}
-            className="p-2.5 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 transition-colors"
+            className="p-3 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 transition-colors"
             aria-label="Copy Link"
           >
-            {copied ? <Check className="w-5 h-5 text-green-500" /> : <Link2 className="w-5 h-5" />}
+            {copied ? <Check className="w-6 h-6 text-green-500" /> : <Link2 className="w-6 h-6" />}
           </button>
           <button
             onClick={handlePrint}
-            className="p-2.5 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 transition-colors"
+            className="p-3 rounded-full bg-muted text-muted-foreground hover:bg-muted/80 transition-colors"
             aria-label="Print"
           >
-            <Printer className="w-5 h-5" />
+            <Printer className="w-6 h-6" />
           </button>
         </div>
 
         {/* Content */}
         <div className="prose max-w-none">
-          <p className="text-2xl md:text-3xl text-muted-foreground mb-10 leading-relaxed">
+          <p className="text-3xl md:text-4xl text-muted-foreground mb-12 leading-relaxed">
             {news.excerpt}
           </p>
           {news.content.split('\n\n').map((paragraph, index) => (
-            <p key={index} className="text-foreground leading-relaxed mb-6 text-xl md:text-2xl">
+            <p key={index} className="text-foreground leading-relaxed mb-8 text-2xl md:text-3xl">
               {paragraph}
             </p>
           ))}
