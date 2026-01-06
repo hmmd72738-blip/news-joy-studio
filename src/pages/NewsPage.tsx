@@ -1,9 +1,8 @@
 import { useParams, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Header from "@/components/Header";
 import CategoryBar from "@/components/CategoryBar";
 import NewsDetail from "@/components/NewsDetail";
-import Sidebar from "@/components/Sidebar";
 import Footer from "@/components/Footer";
 import ScrollToTop from "@/components/ScrollToTop";
 import { NewsItem, categories } from "@/data/newsData";
@@ -45,10 +44,12 @@ const NewsPage = () => {
   const [activeCategory, setActiveCategory] = useState("home");
   const [searchQuery, setSearchQuery] = useState("");
   
+  // Use cached news data - this will be instant if already loaded
   const { news: dbNews, loading } = useNews();
   
-  const newsData = dbNews.map(convertToNewsItem);
-  const currentNews = newsData.find(n => String(n.id) === id);
+  // Memoize converted data
+  const newsData = useMemo(() => dbNews.map(convertToNewsItem), [dbNews]);
+  const currentNews = useMemo(() => newsData.find(n => String(n.id) === id), [newsData, id]);
 
   useEffect(() => {
     if (darkMode) {
@@ -68,13 +69,10 @@ const NewsPage = () => {
     navigate("/");
   };
 
-  const handleReadMore = (newsId: number | string) => {
-    navigate(`/news/${newsId}`);
-  };
-
-  if (loading) {
+  // Show loading only if we don't have cached data
+  if (loading && dbNews.length === 0) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background page-transition">
         <Header
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}
@@ -99,7 +97,7 @@ const NewsPage = () => {
 
   if (!currentNews) {
     return (
-      <div className="min-h-screen bg-background">
+      <div className="min-h-screen bg-background page-transition">
         <Header
           darkMode={darkMode}
           toggleDarkMode={toggleDarkMode}
@@ -129,7 +127,7 @@ const NewsPage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background page-transition">
       <Header
         darkMode={darkMode}
         toggleDarkMode={toggleDarkMode}
@@ -143,7 +141,7 @@ const NewsPage = () => {
         setActiveCategory={setActiveCategory}
       />
 
-      <main>
+      <main className="animate-fade-in">
         <NewsDetail news={currentNews} onBack={handleBack} />
       </main>
 

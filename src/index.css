@@ -522,6 +522,15 @@
   animation: glow-pulse 2s ease-in-out infinite;
 }
 
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.3s ease-out forwards;
+}
+
 /* Stagger delays */
 .stagger-1 { animation-delay: 0.1s; }
 .stagger-2 { animation-delay: 0.2s; }
@@ -536,7 +545,12 @@
 
 /* ===== PAGE TRANSITIONS ===== */
 .page-transition {
-  @apply transition-all duration-300 ease-out;
+  animation: fade-in 0.2s ease-out;
+}
+
+/* Smooth link transitions */
+a {
+  transition: color 0.2s ease, opacity 0.2s ease;
 }
 
 /* ===== SCROLLBAR ===== */
