@@ -1,12 +1,12 @@
 import { NewsItem, prayerTimes, getBanglaDate } from "@/data/newsData";
 import { TrendingUp, Clock, Eye, Calendar, Moon } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface SidebarProps {
   popularNews: NewsItem[];
-  onReadMore?: (id: number | string) => void;
 }
 
-const Sidebar = ({ popularNews, onReadMore }: SidebarProps) => {
+const Sidebar = ({ popularNews }: SidebarProps) => {
   // Take top 5 news for popular section
   const topNews = popularNews.slice(0, 5);
 
@@ -64,42 +64,41 @@ const Sidebar = ({ popularNews, onReadMore }: SidebarProps) => {
 
           <div className="space-y-3">
             {topNews.map((news, index) => (
-              <article
-                key={news.id}
-                className="group flex gap-3 cursor-pointer p-2 -mx-2 rounded-xl hover:bg-muted/50 transition-colors duration-300"
-                onClick={() => onReadMore?.(news.id)}
-              >
-                {/* Number */}
-                <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center text-accent-foreground font-display font-bold text-base">
-                  {index + 1}
-                </div>
-
-                {/* Content */}
-                <div className="flex-1 min-w-0">
-                  <h4 className="font-display text-sm font-semibold text-foreground leading-snug line-clamp-2 group-hover:text-accent transition-colors duration-300">
-                    {news.title}
-                  </h4>
-                  <div className="flex items-center gap-3 mt-1.5 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-3 h-3" />
-                      {news.readTime}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Eye className="w-3 h-3" />
-                      ১.২k
-                    </span>
+              <Link key={news.id} to={`/news/${news.id}`}>
+                <article className="group flex gap-3 cursor-pointer p-2 -mx-2 rounded-xl hover:bg-muted/50 transition-colors duration-300">
+                  {/* Number */}
+                  <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center text-accent-foreground font-display font-bold text-base">
+                    {index + 1}
                   </div>
-                </div>
 
-                {/* Image */}
-                <div className="flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden">
-                  <img
-                    src={news.image}
-                    alt={news.title}
-                    className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
-                  />
-                </div>
-              </article>
+                  {/* Content */}
+                  <div className="flex-1 min-w-0">
+                    <h4 className="font-display text-sm font-semibold text-foreground leading-snug line-clamp-2 group-hover:text-accent transition-colors duration-300">
+                      {news.title}
+                    </h4>
+                    <div className="flex items-center gap-3 mt-1.5 text-xs text-muted-foreground">
+                      <span className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        {news.readTime}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Eye className="w-3 h-3" />
+                        ১.২k
+                      </span>
+                    </div>
+                  </div>
+
+                  {/* Image */}
+                  <div className="flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden">
+                    <img
+                      src={news.image}
+                      alt={news.title}
+                      className="w-full h-full object-cover transition-transform duration-300 group-hover:scale-110"
+                      loading="lazy"
+                    />
+                  </div>
+                </article>
+              </Link>
             ))}
           </div>
         </div>

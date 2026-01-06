@@ -10,7 +10,17 @@ import Admin from "./pages/Admin";
 import NewsPage from "./pages/NewsPage";
 import NotFound from "./pages/NotFound";
 
-const queryClient = new QueryClient();
+// Optimized query client with caching
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      gcTime: 1000 * 60 * 30, // 30 minutes garbage collection
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
@@ -22,6 +32,7 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/news/:id" element={<NewsPage />} />
+            <Route path="/kolomer-kontho/:id" element={<NewsPage />} />
             <Route path="/auth" element={<Auth />} />
             <Route path="/admin" element={<Admin />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 
 export interface DBNewsItem {
@@ -15,61 +15,124 @@ export interface DBNewsItem {
   updated_at: string;
 }
 
+const fetchNews = async (): Promise<DBNewsItem[]> => {
+  const { data, error } = await supabase
+    .from("news")
+    .select("*")
+    .order("created_at", { ascending: false });
+
+  if (error) throw error;
+  return data || [];
+};
+
+const fetchNewsById = async (id: string): Promise<DBNewsItem | null> => {
+  const { data, error } = await supabase
+    .from("news")
+    .select("*")
+    .eq("id", id)
+    .single();
+
+  if (error) throw error;
+  return data;
+};
+
 export const useNews = () => {
-  const [news, setNews] = useState<DBNewsItem[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const queryClient = useQueryClient();
 
-  const fetchNews = async () => {
-    setLoading(true);
-    const { data, error } = await supabase
-      .from("news")
-      .select("*")
-      .order("created_at", { ascending: false });
+  const { data: news = [], isLoading: loading, error } = useQuery({
+    queryKey: ["news"],
+    queryFn: fetchNews,
+    staleTime: 1000 * 60 * 5, // 5 minutes cache
+    gcTime: 1000 * 60 * 30, // 30 minutes garbage collection
+  });
 
-    if (error) {
-      setError(error.message);
-    } else {
-      setNews(data || []);
-    }
-    setLoading(false);
-  };
+  const addNewsMutation = useMutation({
+    mutationFn: async (newsItem: Omit<DBNewsItem, "id" | "created_at" | "updated_at">) => {
+      const { data, error } = await supabase
+        .from("news")
+        .insert([newsItem])
+        .select()
+        .single();
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["news"] });
+    },
+  });
+
+  const updateNewsMutation = useMutation({
+    mutationFn: async ({ id, newsItem }: { id: string; newsItem: Partial<DBNewsItem> }) => {
+      const { data, error } = await supabase
+        .from("news")
+        .update(newsItem)
+        .eq("id", id)
+        .select()
+        .single();
+      if (error) throw error;
+      return data;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["news"] });
+    },
+  });
+
+  const deleteNewsMutation = useMutation({
+    mutationFn: async (id: string) => {
+      const { error } = await supabase.from("news").delete().eq("id", id);
+      if (error) throw error;
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["news"] });
+    },
+  });
 
   const addNews = async (newsItem: Omit<DBNewsItem, "id" | "created_at" | "updated_at">) => {
-    const { data, error } = await supabase
-      .from("news")
-      .insert([newsItem])
-      .select()
-      .single();
-
-    if (error) throw error;
-    setNews((prev) => [data, ...prev]);
-    return data;
+    return addNewsMutation.mutateAsync(newsItem);
   };
 
   const updateNews = async (id: string, newsItem: Partial<DBNewsItem>) => {
-    const { data, error } = await supabase
-      .from("news")
-      .update(newsItem)
-      .eq("id", id)
-      .select()
-      .single();
-
-    if (error) throw error;
-    setNews((prev) => prev.map((n) => (n.id === id ? data : n)));
-    return data;
+    return updateNewsMutation.mutateAsync({ id, newsItem });
   };
 
   const deleteNews = async (id: string) => {
-    const { error } = await supabase.from("news").delete().eq("id", id);
-
-    if (error) throw error;
-    setNews((prev) => prev.filter((n) => n.id !== id));
+    return deleteNewsMutation.mutateAsync(id);
   };
 
-  useEffect(() => {
-    fetchNews();
-  }, []);
+  const refetch = () => {
+    queryClient.invalidateQueries({ queryKey: ["news"] });
+  };
 
-  return { news, loading, error, addNews, updateNews, deleteNews, refetch: fetchNews };
+  return { 
+    news, 
+    loading, 
+    error: error?.message || null, 
+    addNews, 
+    updateNews, 
+    deleteNews, 
+    refetch 
+  };
+};
+
+export const useNewsById = (id: string | undefined) => {
+  return useQuery({
+    queryKey: ["news", id],
+    queryFn: () => fetchNewsById(id!),
+    enabled: !!id,
+    staleTime: 1000 * 60 * 5,
+  });
+};
+
+export const usePrefetchNews = () => {
+  const queryClient = useQueryClient();
+  
+  const prefetch = () => {
+    queryClient.prefetchQuery({
+      queryKey: ["news"],
+      queryFn: fetchNews,
+      staleTime: 1000 * 60 * 5,
+    });
+  };
+
+  return prefetch;
 };
