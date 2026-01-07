@@ -8,7 +8,7 @@ interface LeadNewsProps {
 
 const LeadNews = ({ news }: LeadNewsProps) => {
   return (
-    <Link to={`/kalomerkontho/${news.id}`} className="block">
+    <Link to={`/news/${news.id}`} className="block">
       <article className="hero-card group cursor-pointer">
         <div className="relative aspect-[16/9] md:aspect-[21/9] overflow-hidden">
           {/* Image */}

@@ -8,7 +8,7 @@ interface NewsCardProps {
 
 const NewsCard = ({ news }: NewsCardProps) => {
   return (
-    <Link to={`/kalomerkontho/${news.id}`} className="block">
+    <Link to={`/news/${news.id}`} className="block">
       <article className="news-card group cursor-pointer h-full flex flex-col">
         {/* Image Container */}
         <div className="relative overflow-hidden aspect-[16/10]">
