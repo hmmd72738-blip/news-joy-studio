@@ -87,7 +87,7 @@ const Index = () => {
         setActiveCategory={setActiveCategory}
       />
 
-      <main className="container py-6">
+      <main className="container py-6 news-content-zoom">
         {loading ? (
           <div className="flex items-center justify-center py-20">
             <Loader2 className="w-10 h-10 animate-spin text-primary" />

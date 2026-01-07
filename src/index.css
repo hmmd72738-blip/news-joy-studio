@@ -388,6 +388,21 @@
   }
 }
 
+  /* News Content Zoom - Only for main news area */
+  .news-content-zoom {
+    font-size: 1.08em;
+  }
+  
+  .news-content-zoom .news-card {
+    font-size: 1.05em;
+  }
+  
+  .news-content-zoom h1,
+  .news-content-zoom h2,
+  .news-content-zoom h3 {
+    font-size: 1.08em;
+  }
+
 /* ===== UTILITY CLASSES ===== */
 @layer utilities {
   .text-balance {
