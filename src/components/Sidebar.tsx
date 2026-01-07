@@ -64,7 +64,7 @@ const Sidebar = ({ popularNews }: SidebarProps) => {
 
           <div className="space-y-3">
             {topNews.map((news, index) => (
-              <Link key={news.id} to={`/news/${news.id}`}>
+              <Link key={news.id} to={`/kalomerkontho/${news.id}`}>
                 <article className="group flex gap-3 cursor-pointer p-2 -mx-2 rounded-xl hover:bg-muted/50 transition-colors duration-300">
                   {/* Number */}
                   <div className="flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-accent to-accent/50 flex items-center justify-center text-accent-foreground font-display font-bold text-base">
