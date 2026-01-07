@@ -141,7 +141,7 @@ const NewsPage = () => {
         setActiveCategory={setActiveCategory}
       />
 
-      <main className="animate-fade-in">
+      <main className="animate-fade-in news-content-zoom">
         <NewsDetail news={currentNews} onBack={handleBack} />
       </main>
 
