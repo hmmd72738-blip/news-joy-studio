@@ -31,7 +31,7 @@ const NewsArticle = ({ news }: NewsArticleProps) => {
 
       <div className="p-6 md:p-8">
         {/* Title */}
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-4 leading-tight font-display">
+        <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground mb-6 leading-[1.4] font-display">
           {news.title}
         </h2>
 
@@ -52,16 +52,16 @@ const NewsArticle = ({ news }: NewsArticleProps) => {
         </div>
 
         {/* Excerpt - Highlighted */}
-        <div className="mb-6">
-          <p className="text-lg text-muted-foreground leading-relaxed px-4 py-3 bg-muted/50 rounded-lg border-l-4 border-accent">
+        <div className="mb-8">
+          <p className="text-xl md:text-2xl text-muted-foreground leading-[1.8] px-5 py-4 bg-muted/50 rounded-lg border-l-4 border-accent">
             {news.excerpt}
           </p>
         </div>
 
         {/* Content */}
-        <div className="prose prose-lg max-w-none mb-6">
+        <div className="max-w-none mb-6">
           {news.content.split('\n\n').map((paragraph, index) => (
-            <p key={index} className="text-foreground leading-relaxed mb-4">
+            <p key={index} className="text-foreground text-xl md:text-2xl leading-[1.9] md:leading-[2] mb-6 text-justify">
               {paragraph}
             </p>
           ))}
